@@ -4,10 +4,10 @@
 <dict>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>NSAppTransportSecurity</key>
-		<false/>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
+		<key>NSAppTransportSecurity</key>
+		<false/>
 	</dict>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
