@@ -31,4 +31,8 @@ class Client {
         
     }
     
+    class func getEvents(completion: @escaping([Event], Error?) -> Void ) {
+        
+    }
+    
 }
