@@ -8,7 +8,6 @@
 import Foundation
 
 struct Event: Decodable {
-    let date: String
     let description: String
     let image: String
     let longitude: Double
@@ -16,4 +15,5 @@ struct Event: Decodable {
     let price: Double
     let title: String
     let id: String
+    let date: Int
 }

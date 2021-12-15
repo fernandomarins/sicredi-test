@@ -11,7 +11,7 @@ class Client {
     
     enum Endpoints {
         
-        static let baseURL = "http://5f5a8f24d44d640016169133.mockapi.io/api/"
+        static let baseURL = "http://5f5a8f24d44d640016169133.mockapi.io/api"
         static let events = "/events"
         static let checkIn = "/checkin"
         
@@ -31,7 +31,28 @@ class Client {
         
     }
     
-    class func getEvents(completion: @escaping([Event], Error?) -> Void ) {
+    class func getEvents(completion: @escaping([Event]?, Error?) -> Void ) {
+        let url = Endpoints.getEvents.url
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+                return
+            }
+
+            do {
+                let decoder = JSONDecoder()
+                let responseObj = try decoder.decode([Event].self, from: data)
+                DispatchQueue.main.async {
+                    completion(responseObj, nil)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+            }
+        }.resume()
         
     }
     
