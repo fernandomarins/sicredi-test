@@ -28,7 +28,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="NF0-ax-blG" kind="show" id="6R9-FQ-iQj"/>
+                                            <segue destination="NF0-ax-blG" kind="show" identifier="toDetails" id="6R9-FQ-iQj"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -63,7 +63,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="24g-Xq-hUW">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="264" text="Título" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDn-MT-hvY">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Título" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDn-MT-hvY">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="33.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="28"/>
                                         <nil key="textColor"/>

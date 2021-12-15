@@ -11,6 +11,9 @@ class EventsListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    let cellID = "cellID"
+    let segueID = "toDetails"
+    
     var events = [Event]()
     
     override func viewDidLoad() {
@@ -41,6 +44,13 @@ class EventsListViewController: UIViewController {
             
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == segueID {
+            let vc = segue.destination as? DetailsViewController
+            vc?.event = events[tableView.indexPathForSelectedRow!.row]
+        }
+    }
 
 }
 
@@ -51,11 +61,15 @@ extension EventsListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         
         cell.textLabel?.text = events[indexPath.row].title
         
         return cell
     }
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        performSegue(withIdentifier: segueID, sender: self)
+//    }
     
 }

@@ -17,10 +17,23 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var mapView: MKMapView!
     
+    var event: Event?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        let dateTime = event!.date/1000
+        let timeInterval = Double(dateTime)
+        let myDate = Date(timeIntervalSince1970: timeInterval)
+        
+        let df = DateFormatter()
+        df.dateFormat = "EEEE, d MMM, yyyy"
+        
+        let date = df.string(from: myDate)
+        dateLabel.text = date
+        titleLabel.text = event?.title
+        priceLabel.text = "R$ " + event!.price.description
+        descriptionTextView.text = event?.description
     }
 
 }
