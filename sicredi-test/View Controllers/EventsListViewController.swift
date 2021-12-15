@@ -24,7 +24,9 @@ class EventsListViewController: UIViewController {
     fileprivate func loadData() {
         Client.getEvents { events, error in
             if let error = error {
-                print(error)
+                self.showAlert(title: "Error",
+                               message: error.localizedDescription,
+                               titleAction: "OK")
                 return
             }
             
@@ -43,6 +45,7 @@ class EventsListViewController: UIViewController {
 }
 
 extension EventsListViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
     }
