@@ -49,6 +49,8 @@ class EventsListViewController: UIViewController {
         if segue.identifier == segueID {
             let vc = segue.destination as? DetailsViewController
             vc?.event = events[tableView.indexPathForSelectedRow!.row]
+            
+            tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
         }
     }
 
@@ -63,7 +65,13 @@ extension EventsListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         
-        cell.textLabel?.text = events[indexPath.row].title
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
+        cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 15)
+        
+        let title = events[indexPath.row].title
+        let date = events[indexPath.row].date
+        cell.textLabel?.text = title
+        cell.detailTextLabel?.text = convertDate(event: date)
         
         return cell
     }

@@ -1,5 +1,5 @@
 //
-//  Extensions+UIViewController.swift
+//  Extensions.swift
 //  sicredi-test
 //
 //  Created by Fernando Marins on 15/12/21.
@@ -17,5 +17,18 @@ extension UIViewController {
         DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)
         }
+    }
+    
+    func convertDate(event: Int) -> String {
+        let dateTime = event/1000
+        let timeInterval = Double(dateTime)
+        let myDate = Date(timeIntervalSince1970: timeInterval)
+        
+        let df = DateFormatter()
+        df.dateFormat = "EEEE, d MMM, yyyy"
+        
+        let date = df.string(from: myDate)
+        
+        return date
     }
 }

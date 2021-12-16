@@ -16,7 +16,7 @@
 		55E6AD8A276A937A0040BD7F /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E6AD89276A937A0040BD7F /* DetailsViewController.swift */; };
 		55E6AD8D276A94CE0040BD7F /* ClientAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E6AD8C276A94CE0040BD7F /* ClientAPI.swift */; };
 		55E6AD90276A967F0040BD7F /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E6AD8F276A967F0040BD7F /* Event.swift */; };
-		55E6AD92276AA25B0040BD7F /* Extensions+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E6AD91276AA25B0040BD7F /* Extensions+UIViewController.swift */; };
+		55E6AD92276AA25B0040BD7F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E6AD91276AA25B0040BD7F /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +31,7 @@
 		55E6AD89276A937A0040BD7F /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		55E6AD8C276A94CE0040BD7F /* ClientAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientAPI.swift; sourceTree = "<group>"; };
 		55E6AD8F276A967F0040BD7F /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		55E6AD91276AA25B0040BD7F /* Extensions+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+UIViewController.swift"; sourceTree = "<group>"; };
+		55E6AD91276AA25B0040BD7F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +66,7 @@
 			children = (
 				55E6AD75276A8FA00040BD7F /* AppDelegate.swift */,
 				55E6AD77276A8FA00040BD7F /* SceneDelegate.swift */,
-				55E6AD91276AA25B0040BD7F /* Extensions+UIViewController.swift */,
+				55E6AD91276AA25B0040BD7F /* Extensions.swift */,
 				55E6AD8E276A94D40040BD7F /* Model */,
 				55E6AD8B276A93820040BD7F /* View Controllers */,
 				55E6AD7B276A8FA00040BD7F /* Main.storyboard */,
@@ -171,7 +171,7 @@
 				55E6AD78276A8FA00040BD7F /* SceneDelegate.swift in Sources */,
 				55E6AD8D276A94CE0040BD7F /* ClientAPI.swift in Sources */,
 				55E6AD90276A967F0040BD7F /* Event.swift in Sources */,
-				55E6AD92276AA25B0040BD7F /* Extensions+UIViewController.swift in Sources */,
+				55E6AD92276AA25B0040BD7F /* Extensions.swift in Sources */,
 				55E6AD8A276A937A0040BD7F /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

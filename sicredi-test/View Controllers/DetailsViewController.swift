@@ -19,9 +19,26 @@ class DetailsViewController: UIViewController {
     
     var event: Event?
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        mapView.delegate = self
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        displayData()
+    }
+    
+    private func displayData() {
+        dateLabel.text = convertDate(event: event!.date)
+        titleLabel.text = event?.title
+        priceLabel.text = "R$ " + event!.price.description
+        descriptionTextView.text = event?.description
+        loadImage()
+        loadLocation()
+    }
+    
+    private func loadImage() {
         let url = URL(string: event!.image)
         
         Client.downloadImage(from: url!) { data, error in
@@ -36,30 +53,60 @@ class DetailsViewController: UIViewController {
 
             DispatchQueue.main.async {
                 self.image.image = UIImage(data: data)
-                if self.image.image == nil {
-                    self.image.image = UIImage(named: "placeholder")
-                }
+                self.setPlaceholder(image: self.image)
             }
         }
-        
-        let dateTime = event!.date/1000
-        let timeInterval = Double(dateTime)
-        let myDate = Date(timeIntervalSince1970: timeInterval)
-        
-        let df = DateFormatter()
-        df.dateFormat = "EEEE, d MMM, yyyy"
-        
-        let date = df.string(from: myDate)
-        dateLabel.text = date
-        titleLabel.text = event?.title
-        priceLabel.text = "R$ " + event!.price.description
-        descriptionTextView.text = event?.description
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
+    private func setPlaceholder(image: UIImageView) {
+        if image.image == nil {
+            image.image = UIImage(named: "placeholder")
+        }
+    }
+    
+    private func loadLocation() {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2D(latitude: event!.latitude, longitude: event!.longitude)
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let location = CLLocationCoordinate2DMake(event!.latitude, event!.longitude)
+        let region = MKCoordinateRegion(center: location, span: span)
+        mapView.setRegion(region, animated: true)
+        annotation.title = event?.title
+        mapView.addAnnotation(annotation)
     }
 
+}
+
+extension DetailsViewController: MKMapViewDelegate {
+
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.pinTintColor = .blue
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+        
+        // It's required to set canShowCallOut to display the button
+        pinView?.canShowCallout = true
+        
+        // Creating the button to open the location in Maps
+        let button = UIButton(type: .infoLight)
+        pinView?.rightCalloutAccessoryView = button
+        
+        return pinView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            let source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: event?.latitude ?? 0.0, longitude: event?.longitude ?? 0.0)))
+            MKMapItem.openMaps(with: [source], launchOptions: nil)
+        }
+    }
 }
