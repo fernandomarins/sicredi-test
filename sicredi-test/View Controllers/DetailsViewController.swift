@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 
 class DetailsViewController: UIViewController {
-
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
@@ -26,7 +26,9 @@ class DetailsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        displayData()
+        if event != nil {
+            displayData()
+        }
     }
     
     private func displayData() {
@@ -50,7 +52,7 @@ class DetailsViewController: UIViewController {
             guard let data = data else {
                 return
             }
-
+            
             DispatchQueue.main.async {
                 self.image.image = UIImage(data: data)
                 self.setPlaceholder(image: self.image)
@@ -77,20 +79,37 @@ class DetailsViewController: UIViewController {
     
     @IBAction func checkinAction(_ sender: Any) {
         
-        Client.checkIn(eventId: event!.id, name: "fernando", email: "1@1.com") { data, response, error in
-            
-            guard response?.getStatusCode() == 200 else {
-                self.showAlert(title: "Woops!", message: "Não foi possível realizar o check-in!", titleAction: "OK")
-                return
-            }
+        let alert = UIAlertController(title: "Check in", message: "Adicione suas informações", preferredStyle: .alert)
+        alert.addTextField { textfield in
+            textfield.text = "Digite seu nome"
         }
         
+        alert.addTextField { textfield in
+            textfield.text = "Digite seu e-mail"
+        }
+        
+        alert.addAction(UIAlertAction(title: "Check-in", style: .default, handler: { _ in
+            let name = alert.textFields![0].text
+            let email = alert.textFields![1].text
+            
+            Client.checkIn(eventId: self.event!.id, name: name!, email: email!) { data, response, error in
+                guard response?.getStatusCode() == 200 else {
+                    self.showAlert(title: "Woops!", message: "Não foi possível realizar o check-in!", titleAction: "OK")
+                    return
+                }
+            }
+            
+        }))
+        
+        present(alert, animated: true) {
+            self.showAlert(title: "Perfeito!", message: "Check-in confirmado!", titleAction: "OK")
+        }
     }
     
 }
 
 extension DetailsViewController: MKMapViewDelegate {
-
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         let reuseId = "pin"
