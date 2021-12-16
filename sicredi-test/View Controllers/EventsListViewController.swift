@@ -9,6 +9,8 @@ import UIKit
 
 class EventsListViewController: UIViewController {
 
+    var activityView: UIActivityIndicatorView!
+    
     @IBOutlet weak var tableView: UITableView!
     
     let cellID = "cellID"
@@ -21,29 +23,49 @@ class EventsListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        activityView = UIActivityIndicatorView(style: .large)
+        activityView.center = view!.center
+        activityView.hidesWhenStopped = true
+        view.addSubview(activityView)
+        
         loadData()
     }
     
     fileprivate func loadData() {
+        showHideActivityIndicator(show: true)
         Client.getEvents { events, error in
             if let error = error {
+                self.showHideActivityIndicator(show: false)
                 self.showAlert(title: "Error",
                                message: error.localizedDescription,
                                titleAction: "OK")
                 return
             }
             
+            self.showHideActivityIndicator(show: false)
             guard let events = events else {
                 return
             }
             
             self.events = events
             DispatchQueue.main.async {
+                
                 self.tableView.reloadData()
             }
             
         }
     }
+    
+    fileprivate func showHideActivityIndicator(show: Bool) {
+        DispatchQueue.main.async {
+            show ? self.activityView?.startAnimating() : self.activityView.stopAnimating()
+        }
+    }
+    
+    @IBAction func refreshAction(_ sender: Any) {
+        loadData()
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueID {

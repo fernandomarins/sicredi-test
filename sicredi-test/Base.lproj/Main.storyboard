@@ -59,7 +59,13 @@
                             <constraint firstItem="BhS-hr-WMy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ucU-bc-kAr"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Eventos" id="R5n-A3-4EJ"/>
+                    <navigationItem key="navigationItem" title="Eventos" id="R5n-A3-4EJ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="p3l-eI-VGT">
+                            <connections>
+                                <action selector="refreshAction:" destination="BYZ-38-t0r" id="Kdl-C9-s8j"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="BhS-hr-WMy" id="lHq-zV-t7S"/>
                     </connections>

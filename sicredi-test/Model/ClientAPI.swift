@@ -67,7 +67,6 @@ class Client {
     
     class func downloadImage(from url: URL, completion: @escaping (Data?, Error?) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
-            
             guard let data = data else {
                 completion(nil, error)
                 return
