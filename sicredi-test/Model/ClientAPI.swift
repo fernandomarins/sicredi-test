@@ -11,13 +11,16 @@ class Client {
     
     enum Endpoints {
         
+        // Declaring the URLs
         static let baseURL = "http://5f5a8f24d44d640016169133.mockapi.io/api"
         static let events = "/events"
         static let checkIn = "/checkin"
         
+        // Declaring the cases
         case getEvents
         case makeCheckIn
         
+        // Changing the URL according to the endpoint
         var stringValue: String {
             switch self {
             case .getEvents: return Endpoints.baseURL + Endpoints.events
@@ -25,12 +28,14 @@ class Client {
             }
         }
         
+        // Creating the URL
         var url: URL {
             return URL(string: stringValue)!
         }
         
     }
     
+    // Generic GET request
     class func taskForGETRequest<ResponseType: Decodable>(from url: URL, reponseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) {
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
@@ -53,6 +58,7 @@ class Client {
         }.resume()
     }
     
+    // Getting the evetns
     class func getEvents(completion: @escaping([Event]?, Error?) -> Void) {
         let url = Endpoints.getEvents.url
         taskForGETRequest(from: url, reponseType: [Event].self) { response, error in
@@ -65,6 +71,7 @@ class Client {
         
     }
     
+    // Downloading the image
     class func downloadImage(from url: URL, completion: @escaping (Data?, Error?) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data else {
@@ -78,6 +85,7 @@ class Client {
         task.resume()
     }
     
+    // Performing check-in
     class func checkIn(eventId: String, name: String, email: String, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
         let url = Endpoints.makeCheckIn.url
         let task = URLSession.shared.dataTask(with: url) { data, response, error in

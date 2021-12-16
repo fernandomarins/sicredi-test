@@ -10,6 +10,7 @@ import UIKit
 
 extension UIViewController {
     
+    // Displayin alert
     func showAlert(title: String, message: String, titleAction: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let actionOK = UIAlertAction(title: titleAction, style: .default, handler: nil)
@@ -19,6 +20,7 @@ extension UIViewController {
         }
     }
     
+    // Convert date from Int to String
     func convertDate(event: Int) -> String {
         let dateTime = event/1000
         let timeInterval = Double(dateTime)
@@ -35,6 +37,7 @@ extension UIViewController {
 
 extension URLResponse {
 
+    // Returning the status code of the HTTP request
     func getStatusCode() -> Int? {
         if let httpResponse = self as? HTTPURLResponse {
             return httpResponse.statusCode

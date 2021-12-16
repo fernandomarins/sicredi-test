@@ -10,6 +10,8 @@ import MapKit
 
 class DetailsViewController: UIViewController {
     
+    // MARK: - Variables/Constants
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
@@ -18,6 +20,8 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     var event: Event?
+    
+    // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +34,8 @@ class DetailsViewController: UIViewController {
             displayData()
         }
     }
+    
+    // MARK: - Private methods
     
     private func displayData() {
         dateLabel.text = convertDate(event: event!.date)
@@ -72,14 +78,19 @@ class DetailsViewController: UIViewController {
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         let location = CLLocationCoordinate2DMake(event!.latitude, event!.longitude)
         let region = MKCoordinateRegion(center: location, span: span)
+        // Zooming in
         mapView.setRegion(region, animated: true)
         annotation.title = event?.title
+        // Adding the pin
         mapView.addAnnotation(annotation)
     }
+    
+    // MARK: - Actions
     
     @IBAction func checkinAction(_ sender: Any) {
         
         let alert = UIAlertController(title: "Check in", message: "Adicione suas informações", preferredStyle: .alert)
+        // Creating the text fields
         alert.addTextField { textfield in
             textfield.placeholder = "Digite seu nome..."
         }
@@ -126,6 +137,7 @@ class DetailsViewController: UIViewController {
 
 extension DetailsViewController: MKMapViewDelegate {
     
+    // Making the annotations become pins instead of bubbles
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         let reuseId = "pin"
@@ -153,6 +165,7 @@ extension DetailsViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
         if control == view.rightCalloutAccessoryView {
+            // Opening the location in Maps
             let source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: event?.latitude ?? 0.0, longitude: event?.longitude ?? 0.0)))
             MKMapItem.openMaps(with: [source], launchOptions: nil)
         }

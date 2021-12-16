@@ -9,20 +9,24 @@ import UIKit
 
 class EventsListViewController: UIViewController {
 
-    var activityView: UIActivityIndicatorView!
+    // MARK: - Variables/Constants
     
     @IBOutlet weak var tableView: UITableView!
+    
+    var activityView: UIActivityIndicatorView!
+    var events = [Event]()
     
     let cellID = "cellID"
     let segueID = "toDetails"
     
-    var events = [Event]()
-    
+    // MARK: - Lifecycle methods
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         
+        // Adding the activtiy indicator
         activityView = UIActivityIndicatorView(style: .large)
         activityView.center = view!.center
         activityView.hidesWhenStopped = true
@@ -30,6 +34,8 @@ class EventsListViewController: UIViewController {
         
         loadData()
     }
+    
+    // MARK: - Private methods
     
     fileprivate func loadData() {
         showHideActivityIndicator(show: true)
@@ -43,13 +49,14 @@ class EventsListViewController: UIViewController {
             }
             
             self.showHideActivityIndicator(show: false)
+            
             guard let events = events else {
                 return
             }
             
             self.events = events
+            
             DispatchQueue.main.async {
-                
                 self.tableView.reloadData()
             }
             
@@ -62,10 +69,13 @@ class EventsListViewController: UIViewController {
         }
     }
     
+    // MARK: - Actions
+    
     @IBAction func refreshAction(_ sender: Any) {
         loadData()
     }
     
+    // MARK: - Segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueID {
