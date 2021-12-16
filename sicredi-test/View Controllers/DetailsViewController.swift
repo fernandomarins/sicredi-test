@@ -74,7 +74,19 @@ class DetailsViewController: UIViewController {
         annotation.title = event?.title
         mapView.addAnnotation(annotation)
     }
-
+    
+    @IBAction func checkinAction(_ sender: Any) {
+        
+        Client.checkIn(eventId: event!.id, name: "fernando", email: "1@1.com") { data, response, error in
+            
+            guard response?.getStatusCode() == 200 else {
+                self.showAlert(title: "Woops!", message: "Não foi possível realizar o check-in!", titleAction: "OK")
+                return
+            }
+        }
+        
+    }
+    
 }
 
 extension DetailsViewController: MKMapViewDelegate {

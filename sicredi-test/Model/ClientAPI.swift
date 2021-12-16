@@ -31,7 +31,7 @@ class Client {
         
     }
     
-    class func getEvents(completion: @escaping([Event]?, Error?) -> Void ) {
+    class func getEvents(completion: @escaping([Event]?, Error?) -> Void) {
         let url = Endpoints.getEvents.url
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
@@ -56,7 +56,7 @@ class Client {
         
     }
     
-    class func downloadImage(from url: URL, completion: @escaping (Data?, Error?) -> Void ) {
+    class func downloadImage(from url: URL, completion: @escaping (Data?, Error?) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             
             guard let data = data else {
@@ -65,6 +65,15 @@ class Client {
             }
             
             completion(data, nil)
+        }
+        
+        task.resume()
+    }
+    
+    class func checkIn(eventId: String, name: String, email: String, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
+        let url = Endpoints.makeCheckIn.url
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            completion(data, response, error)
         }
         
         task.resume()
