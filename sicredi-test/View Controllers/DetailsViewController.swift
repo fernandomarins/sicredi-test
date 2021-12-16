@@ -81,29 +81,30 @@ class DetailsViewController: UIViewController {
         
         let alert = UIAlertController(title: "Check in", message: "Adicione suas informações", preferredStyle: .alert)
         alert.addTextField { textfield in
-            textfield.text = "Digite seu nome"
+            textfield.placeholder = "Digite seu nome..."
         }
         
         alert.addTextField { textfield in
-            textfield.text = "Digite seu e-mail"
+            textfield.placeholder = "Digite seu e-mail..."
         }
         
         alert.addAction(UIAlertAction(title: "Check-in", style: .default, handler: { _ in
-            let name = alert.textFields![0].text
-            let email = alert.textFields![1].text
-            
-            Client.checkIn(eventId: self.event!.id, name: name!, email: email!) { data, response, error in
-                guard response?.getStatusCode() == 200 else {
-                    self.showAlert(title: "Woops!", message: "Não foi possível realizar o check-in!", titleAction: "OK")
-                    return
+            if let name = alert.textFields![0].text,
+               let email = alert.textFields![1].text,
+               let event = self.event {
+                Client.checkIn(eventId: event.id, name: name, email: email) { data, response, error in
+                    guard response?.getStatusCode() == 200 else {
+                        self.showAlert(title: "Woops!", message: "Não foi possível realizar o check-in!", titleAction: "OK")
+                        return
+                    }
+                    
+                    self.showAlert(title: "Perfeito!", message: "Check-in confirmado!", titleAction: "OK")
                 }
             }
             
         }))
         
-        present(alert, animated: true) {
-            self.showAlert(title: "Perfeito!", message: "Check-in confirmado!", titleAction: "OK")
-        }
+        present(alert, animated: true, completion: nil)
     }
     
 }
