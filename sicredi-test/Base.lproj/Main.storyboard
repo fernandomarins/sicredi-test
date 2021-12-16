@@ -151,7 +151,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Yxv-7t-vFB">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="Hib-Wa-SUJ"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="Hib-Wa-SUJ">
+                            <connections>
+                                <action selector="shareAction:" destination="NF0-ax-blG" id="LVu-la-C9L"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="dateLabel" destination="87j-3Q-JRB" id="uE4-zE-KnG"/>

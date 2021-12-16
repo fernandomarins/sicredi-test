@@ -107,6 +107,19 @@ class DetailsViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    @IBAction func shareAction(_ sender: Any) {
+        
+        let message = "Olha esse evento incrível que eu vou!"
+        let urlString = Client.Endpoints.baseURL + Client.Endpoints.events + "\(event!.id)"
+        let url = URL(string: urlString)
+        
+        let objectsToShare = [message, url as Any]
+        
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        present(activityVC, animated: true, completion: nil)
+    }
+    
+    
 }
 
 extension DetailsViewController: MKMapViewDelegate {
