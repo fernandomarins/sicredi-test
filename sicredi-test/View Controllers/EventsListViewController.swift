@@ -68,8 +68,4 @@ extension EventsListViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        performSegue(withIdentifier: segueID, sender: self)
-//    }
-    
 }
