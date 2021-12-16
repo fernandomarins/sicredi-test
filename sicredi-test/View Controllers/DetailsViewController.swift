@@ -30,9 +30,11 @@ class DetailsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if event != nil {
-            displayData()
+        // Checking if the event is not nil before doing anything
+        guard event != nil else {
+            return
         }
+        displayData()
     }
     
     // MARK: - Private methods
@@ -60,7 +62,9 @@ class DetailsViewController: UIViewController {
             }
             
             DispatchQueue.main.async {
+                // Loading the image view in the main thread
                 self.image.image = UIImage(data: data)
+                // If the image does not exist, display a placeholder
                 self.setPlaceholder(image: self.image)
             }
         }
@@ -90,7 +94,7 @@ class DetailsViewController: UIViewController {
     @IBAction func checkinAction(_ sender: Any) {
         
         let alert = UIAlertController(title: "Check in", message: "Adicione suas informações", preferredStyle: .alert)
-        // Creating the text fields
+        // Creating the text fields to check-in
         alert.addTextField { textfield in
             textfield.placeholder = "Digite seu nome..."
         }
@@ -104,11 +108,14 @@ class DetailsViewController: UIViewController {
                let email = alert.textFields![1].text,
                let event = self.event {
                 Client.checkIn(eventId: event.id, name: name, email: email) { data, response, error in
+                    // Checking if the response status is 200 - which means it's ok
                     guard response?.getStatusCode() == 200 else {
+                        // Informing the user if something goes wrong while checking-in
                         self.showAlert(title: "Woops!", message: "Não foi possível realizar o check-in!", titleAction: "OK")
                         return
                     }
                     
+                    // Informing the user if the check-in was successuflly done
                     self.showAlert(title: "Perfeito!", message: "Check-in confirmado!", titleAction: "OK")
                 }
             }
