@@ -31,28 +31,37 @@ class Client {
         
     }
     
-    class func getEvents(completion: @escaping([Event]?, Error?) -> Void) {
-        let url = Endpoints.getEvents.url
+    class func taskForGETRequest<ResponseType: Decodable>(from url: URL, reponseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) {
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
-                DispatchQueue.main.async {
-                    completion(nil, error)
-                }
+                completion(nil, error)
                 return
             }
 
             do {
                 let decoder = JSONDecoder()
-                let responseObj = try decoder.decode([Event].self, from: data)
+                let responseObj = try decoder.decode(ResponseType.self, from: data)
                 DispatchQueue.main.async {
                     completion(responseObj, nil)
                 }
+                
             } catch {
                 DispatchQueue.main.async {
                     completion(nil, error)
                 }
             }
         }.resume()
+    }
+    
+    class func getEvents(completion: @escaping([Event]?, Error?) -> Void) {
+        let url = Endpoints.getEvents.url
+        taskForGETRequest(from: url, reponseType: [Event].self) { response, error in
+            if let response = response {
+                completion(response, nil)
+            } else {
+                completion([], error)
+            }
+        }
         
     }
     
