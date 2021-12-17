@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		55A0C6F7276D11EA0042C950 /* EventsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0C6F6276D11EA0042C950 /* EventsListViewModel.swift */; };
 		55A0C6F9276D11F90042C950 /* DetailsViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0C6F8276D11F90042C950 /* DetailsViewViewModel.swift */; };
+		55A0C6FC276D124E0042C950 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0C6FB276D124E0042C950 /* EventService.swift */; };
 		55E6AD76276A8FA00040BD7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E6AD75276A8FA00040BD7F /* AppDelegate.swift */; };
 		55E6AD78276A8FA00040BD7F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E6AD77276A8FA00040BD7F /* SceneDelegate.swift */; };
 		55E6AD7A276A8FA00040BD7F /* EventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E6AD79276A8FA00040BD7F /* EventsListViewController.swift */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		55A0C6F6276D11EA0042C950 /* EventsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewModel.swift; sourceTree = "<group>"; };
 		55A0C6F8276D11F90042C950 /* DetailsViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewViewModel.swift; sourceTree = "<group>"; };
+		55A0C6FB276D124E0042C950 /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		55E6AD72276A8FA00040BD7F /* sicredi-test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sicredi-test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E6AD75276A8FA00040BD7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55E6AD77276A8FA00040BD7F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +69,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		55A0C6FA276D12430042C950 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				55A0C6FB276D124E0042C950 /* EventService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		55E6AD69276A8F9F0040BD7F = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +96,7 @@
 		55E6AD74276A8FA00040BD7F /* sicredi-test */ = {
 			isa = PBXGroup;
 			children = (
+				55A0C6FA276D12430042C950 /* Services */,
 				55A0C6F4276D11AC0042C950 /* ViewModel */,
 				55A0C6F3276D11A30042C950 /* View */,
 				55E6AD8E276A94D40040BD7F /* Model */,
@@ -196,6 +207,7 @@
 				55E6AD8D276A94CE0040BD7F /* ClientAPI.swift in Sources */,
 				55E6AD90276A967F0040BD7F /* Event.swift in Sources */,
 				55E6AD92276AA25B0040BD7F /* Extensions.swift in Sources */,
+				55A0C6FC276D124E0042C950 /* EventService.swift in Sources */,
 				55E6AD8A276A937A0040BD7F /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

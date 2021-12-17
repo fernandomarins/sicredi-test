@@ -7,6 +7,8 @@
 
 import Foundation
 
+typealias Events = [Event]
+
 struct Event: Decodable {
     let description: String
     let image: String
