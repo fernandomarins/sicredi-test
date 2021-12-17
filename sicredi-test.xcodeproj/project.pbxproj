@@ -12,6 +12,7 @@
 		55A0C6FC276D124E0042C950 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0C6FB276D124E0042C950 /* EventService.swift */; };
 		55A0C700276D14080042C950 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0C6FE276D14080042C950 /* EventCell.swift */; };
 		55A0C701276D14080042C950 /* EventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A0C6FF276D14080042C950 /* EventCell.xib */; };
+		55A0C703276D1DBD0042C950 /* EventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0C702276D1DBD0042C950 /* EventCellViewModel.swift */; };
 		55E6AD76276A8FA00040BD7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E6AD75276A8FA00040BD7F /* AppDelegate.swift */; };
 		55E6AD78276A8FA00040BD7F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E6AD77276A8FA00040BD7F /* SceneDelegate.swift */; };
 		55E6AD7A276A8FA00040BD7F /* EventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E6AD79276A8FA00040BD7F /* EventsListViewController.swift */; };
@@ -30,6 +31,7 @@
 		55A0C6FB276D124E0042C950 /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		55A0C6FE276D14080042C950 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		55A0C6FF276D14080042C950 /* EventCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventCell.xib; sourceTree = "<group>"; };
+		55A0C702276D1DBD0042C950 /* EventCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellViewModel.swift; sourceTree = "<group>"; };
 		55E6AD72276A8FA00040BD7F /* sicredi-test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sicredi-test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E6AD75276A8FA00040BD7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55E6AD77276A8FA00040BD7F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 		55A0C6F4276D11AC0042C950 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				55A0C702276D1DBD0042C950 /* EventCellViewModel.swift */,
 				55A0C6F6276D11EA0042C950 /* EventsListViewModel.swift */,
 				55A0C6F8276D11F90042C950 /* DetailsViewViewModel.swift */,
 			);
@@ -215,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55E6AD7A276A8FA00040BD7F /* EventsListViewController.swift in Sources */,
+				55A0C703276D1DBD0042C950 /* EventCellViewModel.swift in Sources */,
 				55A0C6F7276D11EA0042C950 /* EventsListViewModel.swift in Sources */,
 				55E6AD76276A8FA00040BD7F /* AppDelegate.swift in Sources */,
 				55A0C6F9276D11F90042C950 /* DetailsViewViewModel.swift in Sources */,
