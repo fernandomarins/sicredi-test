@@ -57,7 +57,7 @@ class DetailsViewController: UIViewController {
         
         descriptionTextView.text = viewModel.description
         loadImage()
-//        loadLocation()
+        loadLocation()
     }
     
     private func loadImage() {
@@ -82,18 +82,18 @@ class DetailsViewController: UIViewController {
         }
     }
     
-//    private func loadLocation() {
-//        let annotation = MKPointAnnotation()
-//        annotation.coordinate = CLLocationCoordinate2D(latitude: event!.latitude, longitude: event!.longitude)
-//        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-//        let location = CLLocationCoordinate2DMake(event!.latitude, event!.longitude)
-//        let region = MKCoordinateRegion(center: location, span: span)
-//        // Zooming in
-//        mapView.setRegion(region, animated: true)
-//        annotation.title = event?.title
-//        // Adding the pin
-//        mapView.addAnnotation(annotation)
-//    }
+    private func loadLocation() {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2D(latitude: viewModel.latitude ?? 0.0, longitude: viewModel.longitude ?? 0.0)
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let location = CLLocationCoordinate2DMake(viewModel.latitude ?? 0.0, viewModel.longitude ?? 0.0)
+        let region = MKCoordinateRegion(center: location, span: span)
+        // Zooming in
+        mapView.setRegion(region, animated: true)
+        annotation.title = viewModel.title
+        // Adding the pin
+        mapView.addAnnotation(annotation)
+    }
     
     // MARK: - Actions
     
