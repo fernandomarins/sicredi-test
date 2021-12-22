@@ -11,6 +11,7 @@ class EventsListViewModel {
     
     var reloadedTableView: (() -> Void)?
     var events = Events()
+    var segue = "toDetails"
     
     private var eventService: EventServiceProtocol
     
@@ -28,6 +29,8 @@ class EventsListViewModel {
         eventService.getEventsService { success, results, error in
             if success, let events = results {
                 self.fetchData(events: events)
+            } else {
+                debugPrint(error)
             }
         }
     }

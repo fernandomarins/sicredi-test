@@ -20,9 +20,16 @@ class EventCell: UITableViewCell {
         return UINib(nibName: identifier, bundle: nil)
     }
     
+    var cellViewMode: EventCellViewModel? {
+        didSet {
+            titleLabel.text = cellViewMode?.title
+            dateLabel.text = convertDate(event: cellViewMode?.date ?? 0)
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

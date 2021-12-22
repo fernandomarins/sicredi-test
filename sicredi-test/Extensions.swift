@@ -45,3 +45,18 @@ extension URLResponse {
         return nil
     }
 }
+
+extension UITableViewCell {
+    func convertDate(event: Int) -> String {
+        let dateTime = event/1000
+        let timeInterval = Double(dateTime)
+        let myDate = Date(timeIntervalSince1970: timeInterval)
+        
+        let df = DateFormatter()
+        df.dateFormat = "EEEE, d MMM, yyyy"
+        
+        let date = df.string(from: myDate)
+        
+        return date
+    }
+}

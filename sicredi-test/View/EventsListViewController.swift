@@ -14,10 +14,16 @@ class EventsListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var activityView: UIActivityIndicatorView!
-    var events = [Event]()
+    
+    lazy var viewModel = {
+        EventsListViewModel()
+    }()
+    
+    lazy var detailsViewModel = {
+        DetailsViewViewModel()
+    }()
     
     let cellID = "cellID"
-    let segueID = "toDetails"
     
     // MARK: - Lifecycle methods
 
@@ -32,36 +38,23 @@ class EventsListViewController: UIViewController {
         activityView.hidesWhenStopped = true
         view.addSubview(activityView)
         
-        loadData()
+        tableView.register(EventCell.nib, forCellReuseIdentifier: EventCell.identifier)
+        initViewModel()
     }
     
-    // MARK: - Private methods
-    
-    fileprivate func loadData() {
+    func initViewModel() {
+        viewModel.getEvents()
         showHideActivityIndicator(show: true)
-        Client.getEvents { events, error in
-            if let error = error {
-                self.showHideActivityIndicator(show: false)
-                self.showAlert(title: "Error",
-                               message: error.localizedDescription,
-                               titleAction: "OK")
-                return
-            }
-            
-            self.showHideActivityIndicator(show: false)
-            
-            guard let events = events else {
-                return
-            }
-            
-            self.events = events
-            
+        viewModel.reloadedTableView = { [weak self] in
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self?.showHideActivityIndicator(show: false)
+                self?.tableView.reloadData()
             }
             
         }
     }
+    
+    // MARK: - Private methods
     
     fileprivate func showHideActivityIndicator(show: Bool) {
         DispatchQueue.main.async {
@@ -72,16 +65,20 @@ class EventsListViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func refreshAction(_ sender: Any) {
-        loadData()
+        initViewModel()
     }
     
     // MARK: - Segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == segueID {
+        if segue.identifier == viewModel.segue {
             let vc = segue.destination as? DetailsViewController
-            vc?.event = events[tableView.indexPathForSelectedRow!.row]
+            vc?.viewModel = detailsViewModel
             
+
+            detailsViewModel.event = viewModel.events[tableView.indexPathForSelectedRow!.row]
+//            vc?.event = events[tableView.indexPathForSelectedRow!.row]
+
             tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
         }
     }
@@ -90,20 +87,32 @@ class EventsListViewController: UIViewController {
 
 extension EventsListViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return events.count
+        return viewModel.eventCellViewModels.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+////        let detailsViewModel = viewModel.getCellViewModel(at: indexPath)
+//        detailsViewModel.event = viewModel.events[tableView.indexPathForSelectedRow!.row]
+//        let vc = DetailsViewController(viewModel: detailsViewModel)
+//
+//        navigationController?.pushViewController(vc, animated: true)
+////        present(vc, animated: true, completion: nil)
+        performSegue(withIdentifier: viewModel.segue, sender: self)
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: EventCell.identifier, for: indexPath) as? EventCell else {
+            fatalError("xib does not exist")
+        }
         
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
-        cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 15)
-        
-        let title = events[indexPath.row].title
-        let date = events[indexPath.row].date
-        cell.textLabel?.text = title
-        cell.detailTextLabel?.text = convertDate(event: date)
+        let cellVM = viewModel.getCellViewModel(at: indexPath)
+        cell.cellViewMode = cellVM
         
         return cell
     }
