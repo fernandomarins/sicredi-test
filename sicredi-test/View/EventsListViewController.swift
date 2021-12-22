@@ -23,7 +23,7 @@ class EventsListViewController: UIViewController {
         DetailsViewViewModel()
     }()
     
-    let cellID = "cellID"
+//    let cellID = "cellID"
     
     // MARK: - Lifecycle methods
 
@@ -73,12 +73,9 @@ class EventsListViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == viewModel.segue {
             let vc = segue.destination as? DetailsViewController
+            // setting the viewModel to detailsViewModel
             vc?.viewModel = detailsViewModel
-            
-
             detailsViewModel.event = viewModel.events[tableView.indexPathForSelectedRow!.row]
-//            vc?.event = events[tableView.indexPathForSelectedRow!.row]
-
             tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
         }
     }
@@ -96,12 +93,6 @@ extension EventsListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-////        let detailsViewModel = viewModel.getCellViewModel(at: indexPath)
-//        detailsViewModel.event = viewModel.events[tableView.indexPathForSelectedRow!.row]
-//        let vc = DetailsViewController(viewModel: detailsViewModel)
-//
-//        navigationController?.pushViewController(vc, animated: true)
-////        present(vc, animated: true, completion: nil)
         performSegue(withIdentifier: viewModel.segue, sender: self)
         
     }

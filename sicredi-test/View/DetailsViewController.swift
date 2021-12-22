@@ -12,7 +12,9 @@ class DetailsViewController: UIViewController {
     
     // MARK: - Variables/Constants
     
-    var viewModel = DetailsViewViewModel()
+    lazy var viewModel = {
+        DetailsViewViewModel()
+    }()
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -34,16 +36,11 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(viewModel.title)
-//        mapView.delegate = self
+        mapView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Checking if the event is not nil before doing anything
-//        guard event != nil else {
-//            return
-//        }
         displayData()
     }
     
@@ -51,33 +48,32 @@ class DetailsViewController: UIViewController {
     
     private func displayData() {
         titleLabel.text = viewModel.title
-        dateLabel.text = convertDate(event: viewModel.date!)//convertDate(event: event!.date)
-        priceLabel.text = "R$ " + viewModel.price!.description// event!.price.description
-        descriptionTextView.text = viewModel.description//event?.description
-//        loadImage()
+        
+        if let date = viewModel.date,
+           let price = viewModel.price {
+            dateLabel.text = convertDate(event: date)
+            priceLabel.text = "R$ " + price.description
+        }
+        
+        descriptionTextView.text = viewModel.description
+        loadImage()
 //        loadLocation()
     }
     
     private func loadImage() {
-//        let url = URL(string: event!.image)
-//
-//        Client.downloadImage(from: url!) { data, error in
-//            if let error = error {
-//                self.showAlert(title: "Error", message: error.localizedDescription, titleAction: "OK")
-//                return
-//            }
-//
-//            guard let data = data else {
-//                return
-//            }
-//
-//            DispatchQueue.main.async {
-//                // Loading the image view in the main thread
-//                self.image.image = UIImage(data: data)
-//                // If the image does not exist, display a placeholder
-//                self.setPlaceholder(image: self.image)
-//            }
-//        }
+        viewModel.getImageFromUrl { data, error in
+            guard let data = data else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                // Loading the image view in the main thread
+                self.image.image = UIImage(data: data)
+                // If the image does not exist, display a placeholder
+                self.setPlaceholder(image: self.image)
+            }
+
+        }
     }
     
     private func setPlaceholder(image: UIImageView) {
