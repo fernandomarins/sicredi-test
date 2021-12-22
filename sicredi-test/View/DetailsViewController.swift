@@ -72,7 +72,7 @@ class DetailsViewController: UIViewController {
                 // If the image does not exist, display a placeholder
                 self.setPlaceholder(image: self.image)
             }
-
+            
         }
     }
     
@@ -99,50 +99,48 @@ class DetailsViewController: UIViewController {
     
     @IBAction func checkinAction(_ sender: Any) {
         
-//        let alert = UIAlertController(title: "Check in", message: "Adicione suas informações", preferredStyle: .alert)
-//        // Creating the text fields to check-in
-//        alert.addTextField { textfield in
-//            textfield.placeholder = "Digite seu nome..."
-//        }
-//
-//        alert.addTextField { textfield in
-//            textfield.placeholder = "Digite seu e-mail..."
-//        }
-//
-//        alert.addAction(UIAlertAction(title: "Check-in", style: .default, handler: { _ in
-//            if let name = alert.textFields![0].text,
-//               let email = alert.textFields![1].text,
-//               let event = self.event {
-//                Client.checkIn(eventId: event.id, name: name, email: email) { data, response, error in
-//                    // Checking if the response status is 200 - which means it's ok
-//                    guard response?.getStatusCode() == 200 else {
-//                        // Informing the user if something goes wrong while checking-in
-//                        self.showAlert(title: "Woops!", message: "Não foi possível realizar o check-in!", titleAction: "OK")
-//                        return
-//                    }
-//
-//                    // Informing the user if the check-in was successuflly done
-//                    self.showAlert(title: "Perfeito!", message: "Check-in confirmado!", titleAction: "OK")
-//                }
-//            }
-//
-//        }))
-//
-//        present(alert, animated: true, completion: nil)
+        let alert = UIAlertController(title: "Check in", message: "Adicione suas informações", preferredStyle: .alert)
+        //        // Creating the text fields to check-in
+        alert.addTextField { textfield in
+            textfield.placeholder = "Digite seu nome..."
+        }
+        //
+        alert.addTextField { textfield in
+            textfield.placeholder = "Digite seu e-mail..."
+        }
+        //
+        alert.addAction(UIAlertAction(title: "Check-in", style: .default, handler: { _ in
+            if let name = alert.textFields![0].text,
+               let email = alert.textFields![1].text {
+                self.viewModel.makeCheckIn(name: name, email: email) { success, error in
+                    if success! {
+                        self.showAlert(title: "Perfeito!", message: "Check-in confirmado!", titleAction: "OK")
+                    } else {
+                        self.showAlert(title: "Woops!", message: "Não foi possível realizar o check-in!", titleAction: "OK")
+                        return
+                    }
+                }
+                
+            }
+            
+        }))
+                                    
+        present(alert, animated: true, completion: nil)
+        
     }
     
     @IBAction func shareAction(_ sender: Any) {
         
-//        if let event = event {
-//            let message = "Olha esse evento incrível que eu vou!"
-//            let urlString = Client.Endpoints.baseURL + Client.Endpoints.events + "\(event.id)"
-//            let url = URL(string: urlString)
-//
-//            let objectsToShare = [message, url as Any]
-//
-//            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-//            present(activityVC, animated: true, completion: nil)
-//        }
+        //        if let event = event {
+        //            let message = "Olha esse evento incrível que eu vou!"
+        //            let urlString = Client.Endpoints.baseURL + Client.Endpoints.events + "\(event.id)"
+        //            let url = URL(string: urlString)
+        //
+        //            let objectsToShare = [message, url as Any]
+        //
+        //            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        //            present(activityVC, animated: true, completion: nil)
+        //        }
     }
     
     
@@ -179,8 +177,8 @@ extension DetailsViewController: MKMapViewDelegate {
         
         if control == view.rightCalloutAccessoryView {
             // Opening the location in Maps
-//            let source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: event?.latitude ?? 0.0, longitude: event?.longitude ?? 0.0)))
-//            MKMapItem.openMaps(with: [source], launchOptions: nil)
+            //            let source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: event?.latitude ?? 0.0, longitude: event?.longitude ?? 0.0)))
+            //            MKMapItem.openMaps(with: [source], launchOptions: nil)
         }
     }
 }

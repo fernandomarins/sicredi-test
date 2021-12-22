@@ -38,11 +38,21 @@ class DetailsViewViewModel {
     
     func getImageFromUrl(completion: @escaping(Data?, Error?) -> Void) {
         let url = URL(string: event!.image)
-        eventService.loadImage(url: url!) { success, data, error in
+        eventService.loadImageService(url: url!) { success, data, error in
             if success, let data = data {
                 completion(data, nil)
             } else {
                 completion(nil, error)
+            }
+        }
+    }
+    
+    func makeCheckIn(name: String, email: String, completion: @escaping (Bool?, Error?) -> Void ) {
+        eventService.makeCheckIn(eventId: event?.id ?? "", name: name, email: email) { success, error in
+            if let success = success {
+                completion(success, nil)
+            } else {
+                completion(false, error)
             }
         }
     }
