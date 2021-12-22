@@ -10,6 +10,8 @@ import UIKit
 
 class DetailsViewViewModel {
     
+    private var eventService: EventServiceProtocol
+    
     var description: String?
     var image: String?
     var longitude: Double?
@@ -17,6 +19,11 @@ class DetailsViewViewModel {
     var price: Double?
     var title: String?
     var date: Int?
+    
+    // Creaeting the string to share
+    var urlString: String {
+        return Client.Endpoints.baseURL + Client.Endpoints.events + "\(String(describing: event?.id))"
+    }
     
     var event: Event? {
         didSet {
@@ -29,8 +36,6 @@ class DetailsViewViewModel {
             self.date = event?.date
         }
     }
-    
-    private var eventService: EventServiceProtocol
 
     init(eventService: EventServiceProtocol = EventService()) {
         self.eventService = eventService

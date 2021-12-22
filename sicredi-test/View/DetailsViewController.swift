@@ -27,6 +27,7 @@ class DetailsViewController: UIViewController {
         super.init(coder: aDecoder)
     }
     
+    // Initializing the view model
     init(viewModel: DetailsViewViewModel) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
@@ -100,15 +101,15 @@ class DetailsViewController: UIViewController {
     @IBAction func checkinAction(_ sender: Any) {
         
         let alert = UIAlertController(title: "Check in", message: "Adicione suas informações", preferredStyle: .alert)
-        //        // Creating the text fields to check-in
+        // Creating the text fields to check-in
         alert.addTextField { textfield in
             textfield.placeholder = "Digite seu nome..."
         }
-        //
+        
         alert.addTextField { textfield in
             textfield.placeholder = "Digite seu e-mail..."
         }
-        //
+        
         alert.addAction(UIAlertAction(title: "Check-in", style: .default, handler: { _ in
             if let name = alert.textFields![0].text,
                let email = alert.textFields![1].text {
@@ -117,14 +118,13 @@ class DetailsViewController: UIViewController {
                         self.showAlert(title: "Perfeito!", message: "Check-in confirmado!", titleAction: "OK")
                     } else {
                         self.showAlert(title: "Woops!", message: "Não foi possível realizar o check-in!", titleAction: "OK")
-                        return
                     }
                 }
                 
             }
             
         }))
-                                    
+        
         present(alert, animated: true, completion: nil)
         
     }
@@ -132,15 +132,13 @@ class DetailsViewController: UIViewController {
     @IBAction func shareAction(_ sender: Any) {
         
         let message = "Olha esse evento incrível que eu vou!"
-        let urlString = Client.Endpoints.baseURL + Client.Endpoints.events + "\(String(describing: viewModel.event?.id))"
-        let url = URL(string: urlString)
+        let url = URL(string: viewModel.urlString)
         
         let objectsToShare = [message, url as Any]
         
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         present(activityVC, animated: true, completion: nil)
     }
-    
     
 }
 
@@ -174,9 +172,9 @@ extension DetailsViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
         if control == view.rightCalloutAccessoryView {
-             // Opening the location in Maps
+            // Opening the location in Maps
             let source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: viewModel.latitude ?? 0.0, longitude: viewModel.longitude ?? 0.0)))
-                        MKMapItem.openMaps(with: [source], launchOptions: nil)
+            MKMapItem.openMaps(with: [source], launchOptions: nil)
         }
     }
 }

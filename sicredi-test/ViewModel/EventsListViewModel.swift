@@ -29,8 +29,6 @@ class EventsListViewModel {
         eventService.getEventsService { success, results, error in
             if success, let events = results {
                 self.fetchData(events: events)
-            } else {
-                debugPrint(error)
             }
         }
     }
@@ -38,6 +36,7 @@ class EventsListViewModel {
     func fetchData(events: Events) {
         self.events = events
         var vms = [EventCellViewModel]()
+        // Injecting created cells in the array to display data
         for event in events {
             vms.append(createCellModel(event: event))
         }
