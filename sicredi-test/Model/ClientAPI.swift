@@ -88,7 +88,12 @@ class Client {
     // Performing check-in
     class func checkIn(eventId: String, name: String, email: String, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
         let url = Endpoints.makeCheckIn.url
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let body = "{\"eventId\": \"\(eventId)\", \"name\": \"\(name)\", \"email\": \"\(email)\"}"
+        request.httpBody = body.data(using: .utf8)
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
             completion(data, response, error)
         }
         
