@@ -131,16 +131,14 @@ class DetailsViewController: UIViewController {
     
     @IBAction func shareAction(_ sender: Any) {
         
-        //        if let event = event {
-        //            let message = "Olha esse evento incrível que eu vou!"
-        //            let urlString = Client.Endpoints.baseURL + Client.Endpoints.events + "\(event.id)"
-        //            let url = URL(string: urlString)
-        //
-        //            let objectsToShare = [message, url as Any]
-        //
-        //            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-        //            present(activityVC, animated: true, completion: nil)
-        //        }
+        let message = "Olha esse evento incrível que eu vou!"
+        let urlString = Client.Endpoints.baseURL + Client.Endpoints.events + "\(String(describing: viewModel.event?.id))"
+        let url = URL(string: urlString)
+        
+        let objectsToShare = [message, url as Any]
+        
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        present(activityVC, animated: true, completion: nil)
     }
     
     
@@ -176,9 +174,9 @@ extension DetailsViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
         if control == view.rightCalloutAccessoryView {
-            // Opening the location in Maps
-            //            let source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: event?.latitude ?? 0.0, longitude: event?.longitude ?? 0.0)))
-            //            MKMapItem.openMaps(with: [source], launchOptions: nil)
+             // Opening the location in Maps
+            let source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: viewModel.latitude ?? 0.0, longitude: viewModel.longitude ?? 0.0)))
+                        MKMapItem.openMaps(with: [source], launchOptions: nil)
         }
     }
 }
