@@ -7,6 +7,7 @@
 
 import UIKit
 import MapKit
+import SnapKit
 
 class DetailsViewController: UIViewController, DetailsViewContract {
 
@@ -37,6 +38,15 @@ class DetailsViewController: UIViewController, DetailsViewContract {
     }
 
     private func setLayout() {
+        setScrollLayoutView()
+        setContentLayout()
+    }
+    
+    private func setScrollLayoutView() {
+        view.addSubview(mainScrollView)
+    }
+    
+    private func setContentLayout() {
         
     }
 
