@@ -103,7 +103,7 @@ extension EventsListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let cellVM = viewModel.getCellViewModel(at: indexPath)
-        cell.cellViewMode = cellVM
+//        cell.cellViewMode = cellVM
         
         return cell
     }

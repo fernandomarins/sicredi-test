@@ -11,6 +11,8 @@ import UIKit
 protocol EventsContract: UIViewController {
     var presenter: EventsPresenterContract? { get set }
     
+    func toggleActivityIndicator(show: Bool)
+    
     func updateContent()
 }
 
@@ -23,6 +25,8 @@ protocol EventsPresenterContract: AnyObject {
     var contentArray: Events { get }
     
     func fetchEvents()
+    func fetchedEvents(output: Events)
+    func fecthedError(message: String)
     
     func toDetails(contentIndex: Int)
 }
@@ -30,6 +34,8 @@ protocol EventsPresenterContract: AnyObject {
 // MARK: Interactor -
 protocol EventsInteractorContract: AnyObject {
     var presenter: EventsPresenterContract? { get set }
+    
+    func fetchEvents()
 }
 
 // MARK: Router -
@@ -42,7 +48,23 @@ protocol EventsRouterContract: AnyObject {
 
 // MARK: Builder -
 struct EventsModuleBuilder {
-//    static func build() -> UIViewController {
-//
-//    }
+    static func build() -> UIViewController {
+        let view = EventsView()
+        let interactor = EventsInteractor()
+        let presenter = EventsPresenter()
+        let router = EventsRouter()
+        
+        view.presenter = presenter
+        
+        presenter.interactor = interactor
+        presenter.view = view
+        presenter.router = router
+        
+        interactor.presenter = presenter
+        
+        router.presenter = presenter
+        router.view = view
+        
+        return view
+    }
 }

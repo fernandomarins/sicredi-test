@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EventsView" customModule="sicredi_test" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="cpT-hf-RBm" id="b7i-95-Byy"/>
                 <outlet property="tableView" destination="keW-4w-iGI" id="3Cu-gJ-wFc"/>
                 <outlet property="view" destination="iN0-l3-epB" id="FTz-Qr-2yP"/>
             </connections>
@@ -22,6 +23,10 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="keW-4w-iGI">
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                 </tableView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="cpT-hf-RBm">
+                    <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                    <color key="color" systemColor="systemPinkColor"/>
+                </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -30,6 +35,8 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="keW-4w-iGI" secondAttribute="bottom" id="T4e-h1-fJx"/>
                 <constraint firstItem="keW-4w-iGI" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="dOE-uV-snI"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="keW-4w-iGI" secondAttribute="trailing" id="gbh-sH-IpI"/>
+                <constraint firstItem="cpT-hf-RBm" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="jS6-Xh-nX4"/>
+                <constraint firstItem="cpT-hf-RBm" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="pwZ-Dn-MgY"/>
             </constraints>
             <point key="canvasLocation" x="139" y="110"/>
         </view>
@@ -37,6 +44,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

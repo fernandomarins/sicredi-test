@@ -8,13 +8,11 @@
 import UIKit
 
 class EventsRouter: EventsRouterContract {
+    
+    weak var presenter: EventsPresenterContract?
+    weak var view: EventsContract?
+    
     func toDetails(event: Event) {
-        
+        // to Details
     }
-    
-    var presenter: EventsPresenterContract?
-    
-    var view: EventsContract?
-    
-    
 }

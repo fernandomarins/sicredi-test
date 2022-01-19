@@ -20,11 +20,16 @@ class EventCell: UITableViewCell {
         return UINib(nibName: identifier, bundle: nil)
     }
     
-    var cellViewMode: EventCellViewModel? {
-        didSet {
-            titleLabel.text = cellViewMode?.title
-            dateLabel.text = convertDate(event: cellViewMode?.date ?? 0)
-        }
+//    var cellViewMode: EventCellViewModel? {
+//        didSet {
+//            titleLabel.text = cellViewMode?.title
+//            dateLabel.text = convertDate(event: cellViewMode?.date ?? 0)
+//        }
+//    }
+    
+    func setContent(_ event: Event) {
+        titleLabel.text = event.title
+        dateLabel.text = convertDate(event: event.date)
     }
     
     override func prepareForReuse() {

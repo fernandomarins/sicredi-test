@@ -16,7 +16,7 @@ protocol EventServiceProtocol {
 
 class EventService: EventServiceProtocol {
     
-    static let sahred = EventService()
+    static let shared = EventService()
     
     func getEventsService(completion: @escaping (Bool, Events?, Error?) -> ()) {
         Client.getEvents { events, error in

@@ -8,14 +8,6 @@
 import UIKit
 
 class EventsPresenter: EventsPresenterContract {
-    func fetchEvents() {
-        
-    }
-    
-    func toDetails(contentIndex: Int) {
-        
-    }
-    
     
     var router: EventsRouterContract?
     var interactor: EventsInteractorContract?
@@ -27,7 +19,22 @@ class EventsPresenter: EventsPresenterContract {
         contentArray = []
     }
     
-    func toEventsDetail(contentIndex: Int) {
-//        router
+    func fetchEvents() {
+        view?.toggleActivityIndicator(show: true)
+        interactor?.fetchEvents()
+    }
+    
+    func fetchedEvents(output: Events) {
+        contentArray = output
+        view?.toggleActivityIndicator(show: false)
+        view?.updateContent()
+    }
+    
+    func fecthedError(message: String) {
+        
+    }
+    
+    func toDetails(contentIndex: Int) {
+
     }
 }

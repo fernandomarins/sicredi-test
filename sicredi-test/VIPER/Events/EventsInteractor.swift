@@ -11,10 +11,21 @@ class EventsInteractor: EventsInteractorContract {
     weak var presenter: EventsPresenterContract?
     
     func fetchEvents() {
-        EventService.sahred.getEventsService { success, events, error in
-            if success {
-                
+        EventService.shared.getEventsService { [weak self] success, events, error in
+            
+            if let error = error {
+                self?.fetchedError(message: error.localizedDescription)
             }
+            
+            guard let events = events else {
+                return
+            }
+            
+            self?.presenter?.fetchedEvents(output: events)
         }
+    }
+    
+    private func fetchedError(message: String) {
+        presenter?.fecthedError(message: message)
     }
 }
