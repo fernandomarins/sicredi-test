@@ -13,6 +13,8 @@ protocol EventsContract: UIViewController {
     
     func toggleActivityIndicator(show: Bool)
     
+    func showError(message: String)
+    
     func updateContent()
 }
 

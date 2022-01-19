@@ -8,6 +8,7 @@
 import UIKit
 
 class EventsInteractor: EventsInteractorContract {
+    
     weak var presenter: EventsPresenterContract?
     
     func fetchEvents() {

@@ -74,7 +74,7 @@ class EventsListViewController: UIViewController {
         if segue.identifier == viewModel.segue {
             let vc = segue.destination as? DetailsViewController
             // setting the viewModel to detailsViewModel
-            vc?.viewModel = detailsViewModel
+//            vc?.viewModel = detailsViewModel
             detailsViewModel.event = viewModel.events[tableView.indexPathForSelectedRow!.row]
             tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
         }

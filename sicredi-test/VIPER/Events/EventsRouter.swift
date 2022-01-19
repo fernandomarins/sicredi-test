@@ -13,6 +13,7 @@ class EventsRouter: EventsRouterContract {
     weak var view: EventsContract?
     
     func toDetails(event: Event) {
-        // to Details
+        let viewController = DetailsModuleBuilder.build(event: event)
+        view?.navigationController?.pushViewController(viewController, animated: true)
     }
 }

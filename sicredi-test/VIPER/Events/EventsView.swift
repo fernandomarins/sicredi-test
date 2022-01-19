@@ -33,7 +33,13 @@ class EventsView: UIViewController, EventsContract {
     }
     
     func updateContent() {
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func showError(message: String) {
+        showAlert(title: "Error", message: message, titleAction: "OK")
     }
     
 }
@@ -48,6 +54,10 @@ extension EventsView: UITableViewDelegate, UITableViewDataSource {
         cell.setContent(item)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter?.toDetails(contentIndex: indexPath.row)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -11,7 +11,7 @@ class EventsPresenter: EventsPresenterContract {
     
     var router: EventsRouterContract?
     var interactor: EventsInteractorContract?
-    var view: EventsContract?
+    weak var view: EventsContract?
     
     var contentArray: Events
     
@@ -31,10 +31,11 @@ class EventsPresenter: EventsPresenterContract {
     }
     
     func fecthedError(message: String) {
-        
+        view?.toggleActivityIndicator(show: false)
+        view?.showError(message: message)
     }
     
     func toDetails(contentIndex: Int) {
-
+        router?.toDetails(event: contentArray[contentIndex])
     }
 }
