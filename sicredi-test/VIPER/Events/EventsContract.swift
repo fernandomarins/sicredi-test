@@ -10,6 +10,8 @@ import UIKit
 // MARK: View -
 protocol EventsContract: UIViewController {
     var presenter: EventsPresenterContract? { get set }
+    
+    func updateContent()
 }
 
 // MARK: Presenter -
@@ -17,6 +19,12 @@ protocol EventsPresenterContract: AnyObject {
     var router: EventsRouterContract? { get set }
     var interactor: EventsInteractorContract? { get set }
     var view: EventsContract? { get set }
+    
+    var contentArray: Events { get }
+    
+    func fetchEvents()
+    
+    func toDetails(contentIndex: Int)
 }
 
 // MARK: Interactor -
@@ -28,6 +36,8 @@ protocol EventsInteractorContract: AnyObject {
 protocol EventsRouterContract: AnyObject {
     var presenter: EventsPresenterContract? { get set }
     var view: EventsContract? { get set }
+    
+    func toDetails(event: Event)
 }
 
 // MARK: Builder -

@@ -9,6 +9,8 @@ import Foundation
 
 class Client {
     
+    static let shared: Client = Client()
+    
     enum Endpoints {
         
         // Declaring the URLs
@@ -58,7 +60,7 @@ class Client {
         }.resume()
     }
     
-    // Getting the evetns
+    // Getting the events
     class func getEvents(completion: @escaping([Event]?, Error?) -> Void) {
         let url = Endpoints.getEvents.url
         taskForGETRequest(from: url, reponseType: [Event].self) { response, error in
