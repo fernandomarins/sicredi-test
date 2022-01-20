@@ -7,10 +7,16 @@
 
 import Foundation
 
-class DetailsPresenter: DetailsPresenterContract {
+class DetailsPresenter: DetailsPresenterContract {    
 
     var router: DetailsRouterContract?
     var interactor: DetailsInteractorContract?
     weak var view: DetailsViewContract?
+    
+    var event: Event?
+    
+    init(event: Event?) {
+        self.event = event
+    }
 
 }

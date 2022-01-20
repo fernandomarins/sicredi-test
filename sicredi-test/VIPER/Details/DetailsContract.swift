@@ -17,6 +17,8 @@ protocol DetailsPresenterContract: AnyObject {
     var router: DetailsRouterContract? { get set }
     var interactor: DetailsInteractorContract? { get set }
     var view: DetailsViewContract? { get set }
+    
+    var event: Event? { get }
 }
 
 //MARK: Interactor -
@@ -35,7 +37,7 @@ struct DetailsModuleBuilder {
     static func build(event: Event) -> UIViewController {
         let view = DetailsViewController()
         let interactor = DetailsInteractor()
-        let presenter = DetailsPresenter()
+        let presenter = DetailsPresenter(event: event)
         let router = DetailsRouter()
 
         view.presenter = presenter
