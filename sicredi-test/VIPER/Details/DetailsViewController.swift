@@ -63,7 +63,7 @@ class DetailsViewController: UIViewController, DetailsViewContract {
         mainStackView.axis = .vertical
         mainStackView.alignment = .fill
         mainStackView.distribution = .fill
-        mainStackView.spacing = 20
+        mainStackView.spacing = 30
         mainStackView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -107,19 +107,21 @@ class DetailsViewController: UIViewController, DetailsViewContract {
         eventImage.contentMode = .scaleAspectFill
         eventImage.snp.makeConstraints {
             $0.top.equalTo(priceLabel.snp.bottom).offset(20)
-            $0.height.equalTo(200)
+            $0.height.equalTo(240)
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-15)
         }
         
         mainStackView.addArrangedSubview(descriptionTextView)
         descriptionTextView.adjustsFontForContentSizeCategory = true
-        descriptionTextView.font = descriptionTextView.font?.withSize(14)
+        descriptionTextView.sizeToFit()
+//        descriptionTextView.font = descriptionTextView.font?.withSize(18)
         descriptionTextView.snp.makeConstraints {
             $0.top.equalTo(eventImage.snp.bottom)
             $0.height.equalTo(140)
-            $0.leading.equalToSuperview().offset(15)
-            $0.trailing.equalToSuperview().offset(-15)
+            // I am setting to 12 because the textview has a little padding, apparently
+            $0.leading.equalToSuperview().offset(12)
+            $0.trailing.equalToSuperview().offset(-12)
         }
         
         mainStackView.addArrangedSubview(mapView)
@@ -133,7 +135,7 @@ class DetailsViewController: UIViewController, DetailsViewContract {
         mainStackView.addArrangedSubview(checkinButton)
         checkinButton.addTarget(self, action: #selector(getUserInfo), for: .touchUpInside)
         checkinButton.backgroundColor = .blue
-        checkinButton.layer.cornerRadius = 10
+        checkinButton.layer.cornerRadius = 8
         checkinButton.setTitle("Check-in", for: .normal)
         checkinButton.setTitleColor(.white, for: .normal)
         checkinButton.snp.makeConstraints {
@@ -179,13 +181,13 @@ class DetailsViewController: UIViewController, DetailsViewContract {
         titleLabel.text = presenter?.event?.title
         dateLabel.text = convertDate(event: presenter?.event?.date ?? 0)
         if let price = presenter?.event?.price {
-            priceLabel.text = "\(price)"
+            priceLabel.text = "R$ \(price)"
         }
         let url = URL(string: presenter?.event!.image ?? "")
         eventImage.kf.setImage(with: url, placeholder: nil, options: nil, completionHandler: nil)
         descriptionTextView.text = presenter?.event?.description
     }
-    
+        
     private func loadLocation() {
         let annotation = MKPointAnnotation()
         annotation.coordinate = CLLocationCoordinate2D(latitude: presenter?.event?.latitude ?? 0.0, longitude: presenter?.event?.longitude ?? 0.0)

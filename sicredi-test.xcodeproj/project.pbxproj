@@ -195,20 +195,12 @@
 				55E6AD75276A8FA00040BD7F /* AppDelegate.swift */,
 				55E6AD77276A8FA00040BD7F /* SceneDelegate.swift */,
 				55E6AD91276AA25B0040BD7F /* Extensions.swift */,
-				55E6AD8B276A93820040BD7F /* View Controllers */,
 				55E6AD7B276A8FA00040BD7F /* Main.storyboard */,
 				55E6AD7E276A8FA10040BD7F /* Assets.xcassets */,
 				55E6AD80276A8FA10040BD7F /* LaunchScreen.storyboard */,
 				55E6AD83276A8FA10040BD7F /* Info.plist */,
 			);
 			path = "sicredi-test";
-			sourceTree = "<group>";
-		};
-		55E6AD8B276A93820040BD7F /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		55E6AD8E276A94D40040BD7F /* Model */ = {
@@ -226,7 +218,6 @@
 				7450FBF2ADA3B2D1394FD95A /* Pods-sicredi-test.debug.xcconfig */,
 				9A0D06059E33C1AD4AD60ADE /* Pods-sicredi-test.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
