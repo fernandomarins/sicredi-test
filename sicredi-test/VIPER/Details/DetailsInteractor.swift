@@ -16,13 +16,13 @@ class DetailsInteractor: DetailsInteractorContract {
             if success == nil {
                 self?.presenter?.performedCheckin()
             } else {
-                self?.fetchedError(message: error?.localizedDescription ?? "")
+                self?.fetchedError()
             }
         }
     }
     
-    private func fetchedError(message: String) {
-        presenter?.fetchedError(message: message)
+    private func fetchedError() {
+        presenter?.fetchedError()
     }
 
 }

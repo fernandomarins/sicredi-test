@@ -37,6 +37,9 @@ class DetailsViewController: UIViewController, DetailsViewContract {
         setScrollLayoutView()
         setContentLayout()
         setContent()
+        loadLocation()
+        
+        mapView.delegate = self
     }
     
     private func setScrollLayoutView() {
@@ -181,7 +184,55 @@ class DetailsViewController: UIViewController, DetailsViewContract {
         let url = URL(string: presenter?.event!.image ?? "")
         eventImage.kf.setImage(with: url, placeholder: nil, options: nil, completionHandler: nil)
         descriptionTextView.text = presenter?.event?.description
-        
     }
     
+    private func loadLocation() {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2D(latitude: presenter?.event?.latitude ?? 0.0, longitude: presenter?.event?.longitude ?? 0.0)
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let location = CLLocationCoordinate2DMake(presenter?.event?.latitude ?? 0.0, presenter?.event?.longitude ?? 0.0)
+        let region = MKCoordinateRegion(center: location, span: span)
+        // Zooming in
+        mapView.setRegion(region, animated: true)
+        annotation.title = presenter?.event?.title
+        // Adding the pin
+        mapView.addAnnotation(annotation)
+    }
+    
+}
+
+extension DetailsViewController: MKMapViewDelegate {
+    // Making the annotations become pins instead of bubbles
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.pinTintColor = .blue
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+        
+        // It's required to set canShowCallOut to display the button
+        pinView?.canShowCallout = true
+        
+        // Creating the button to open the location in Maps
+        let button = UIButton(type: .infoLight)
+        pinView?.rightCalloutAccessoryView = button
+        
+        return pinView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        if control == view.rightCalloutAccessoryView {
+            // Opening the location in Maps
+            let source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: presenter?.event?.latitude ?? 0.0, longitude: presenter?.event?.longitude ?? 0.0)))
+            MKMapItem.openMaps(with: [source], launchOptions: nil)
+        }
+    }
 }
