@@ -71,14 +71,15 @@ class DetailsViewController: UIViewController, DetailsViewContract {
     
     private func setContentLayout() {
         mainStackView.addArrangedSubview(titleLabel)
-        titleLabel.font = titleLabel.font.withSize(28)
-        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.numberOfLines = 0
+        titleLabel.font = titleLabel.font.withSize(24)
+        titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.textAlignment = .center
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.height.equalTo(34)
-            $0.leading.equalToSuperview().offset(15)
-            $0.trailing.equalToSuperview().offset(-15)
+            $0.height.equalTo(60)
+            $0.leading.equalTo(mainStackView.snp.leading)
+            $0.trailing.equalTo(mainStackView.snp.trailing)
         }
         
         mainStackView.addArrangedSubview(dateLabel)
@@ -87,9 +88,9 @@ class DetailsViewController: UIViewController, DetailsViewContract {
         dateLabel.textAlignment = .center
         dateLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(20)
-            $0.height.equalTo(32)
-            $0.leading.equalToSuperview().offset(15)
-            $0.trailing.equalToSuperview().offset(-15)
+            $0.height.equalTo(23)
+            $0.leading.equalTo(mainStackView.snp.leading).offset(15)
+            $0.trailing.equalTo(mainStackView.snp.trailing).offset(-15)
         }
         
         mainStackView.addArrangedSubview(priceLabel)
@@ -98,17 +99,17 @@ class DetailsViewController: UIViewController, DetailsViewContract {
         priceLabel.snp.makeConstraints {
             $0.top.equalTo(dateLabel.snp.bottom).offset(20)
             $0.height.equalTo(23)
-            $0.leading.equalToSuperview().offset(15)
-            $0.trailing.equalToSuperview().offset(-15)
+            $0.leading.equalTo(mainStackView.snp.leading).offset(15)
+            $0.trailing.equalTo(mainStackView.snp.trailing).offset(-15)
         }
         
         mainStackView.addArrangedSubview(eventImage)
-        eventImage.contentMode = .scaleAspectFit
+        eventImage.contentMode = .scaleToFill
         eventImage.snp.makeConstraints {
             $0.top.equalTo(priceLabel.snp.bottom).offset(20)
             $0.height.equalTo(240)
-            $0.leading.equalToSuperview().offset(15)
-            $0.trailing.equalToSuperview().offset(-15)
+            $0.leading.equalTo(mainStackView.snp.leading).offset(15)
+            $0.trailing.equalTo(mainStackView.snp.trailing).offset(-15)
         }
         
         mainStackView.addArrangedSubview(descriptionTextView)
@@ -118,16 +119,16 @@ class DetailsViewController: UIViewController, DetailsViewContract {
             $0.top.equalTo(eventImage.snp.bottom).offset(20)
             $0.height.equalTo(140)
             // I am setting to 12 because the textview has a little padding, apparently
-            $0.leading.equalToSuperview().offset(12)
-            $0.trailing.equalToSuperview().offset(-12)
+            $0.leading.equalTo(mainStackView.snp.leading).offset(15)
+            $0.trailing.equalTo(mainStackView.snp.trailing).offset(-15)
         }
         
         mainStackView.addArrangedSubview(mapView)
         mapView.snp.makeConstraints {
             $0.top.equalTo(descriptionTextView.snp.bottom).offset(20)
             $0.height.equalTo(180)
-            $0.leading.equalToSuperview().offset(15)
-            $0.trailing.equalToSuperview().offset(-15)
+            $0.leading.equalTo(mainStackView.snp.leading).offset(15)
+            $0.trailing.equalTo(mainStackView.snp.trailing).offset(-15)
         }
         
         mainStackView.addArrangedSubview(checkinButton)
