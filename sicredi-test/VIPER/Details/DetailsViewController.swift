@@ -95,9 +95,8 @@ class DetailsViewController: UIViewController, DetailsViewContract {
         mainStackView.addArrangedSubview(priceLabel)
         priceLabel.adjustsFontSizeToFitWidth = true
         priceLabel.textAlignment = .center
-        priceLabel.backgroundColor = .red
         priceLabel.snp.makeConstraints {
-            $0.top.equalTo(dateLabel.snp.bottom).offset(20)
+            $0.top.equalTo(dateLabel.snp.bottom)
             $0.height.equalTo(23)
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-15)
@@ -106,7 +105,7 @@ class DetailsViewController: UIViewController, DetailsViewContract {
         mainStackView.addArrangedSubview(eventImage)
         eventImage.contentMode = .scaleAspectFill
         eventImage.snp.makeConstraints {
-            $0.top.equalTo(priceLabel.snp.bottom).offset(20)
+            $0.top.equalTo(priceLabel.snp.bottom).offset(45)
             $0.height.equalTo(240)
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-15)
@@ -115,7 +114,6 @@ class DetailsViewController: UIViewController, DetailsViewContract {
         mainStackView.addArrangedSubview(descriptionTextView)
         descriptionTextView.adjustsFontForContentSizeCategory = true
         descriptionTextView.sizeToFit()
-//        descriptionTextView.font = descriptionTextView.font?.withSize(18)
         descriptionTextView.snp.makeConstraints {
             $0.top.equalTo(eventImage.snp.bottom)
             $0.height.equalTo(140)
@@ -184,7 +182,7 @@ class DetailsViewController: UIViewController, DetailsViewContract {
             priceLabel.text = "R$ \(price)"
         }
         let url = URL(string: presenter?.event!.image ?? "")
-        eventImage.kf.setImage(with: url, placeholder: nil, options: nil, completionHandler: nil)
+        eventImage.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"), options: nil, completionHandler: nil)
         descriptionTextView.text = presenter?.event?.description
     }
         
