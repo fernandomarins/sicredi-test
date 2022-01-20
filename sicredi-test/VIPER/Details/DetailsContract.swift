@@ -10,6 +10,10 @@ import UIKit
 //MARK: View -
 protocol DetailsViewContract: AnyObject {
     var presenter: DetailsPresenterContract? { get set }
+    
+    func getUserInfo()
+    func checkInDone()
+    func showError()
 }
 
 //MARK: Presenter -
@@ -19,11 +23,18 @@ protocol DetailsPresenterContract: AnyObject {
     var view: DetailsViewContract? { get set }
     
     var event: Event? { get }
+    
+    func performCheckIn(name: String, email: String)
+    func performedCheckin()
+    
+    func fetchedError()
 }
 
 //MARK: Interactor -
 protocol DetailsInteractorContract: AnyObject {
     var presenter: DetailsPresenterContract? { get set }
+    
+    func performCheckIn(name: String, email: String, eventId: String)
 }
 
 //MARK: Router -

@@ -11,7 +11,8 @@ import SnapKit
 import Kingfisher
 
 class DetailsViewController: UIViewController, DetailsViewContract {
-
+    
+    
     var presenter: DetailsPresenterContract?
     
     // MARK: ViewCode
@@ -26,17 +27,12 @@ class DetailsViewController: UIViewController, DetailsViewContract {
     private let descriptionTextView = UITextView()
     private let mapView = MKMapView()
     private let checkinButton = UIButton()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setLayout()
     }
-
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//    }
-
+    
     private func setLayout() {
         setScrollLayoutView()
         setContentLayout()
@@ -62,7 +58,8 @@ class DetailsViewController: UIViewController, DetailsViewContract {
         
         mainContainer.addSubview(mainStackView)
         mainStackView.axis = .vertical
-        mainStackView.alignment = .top
+        mainStackView.alignment = .fill
+        mainStackView.distribution = .fill
         mainStackView.spacing = 20
         mainStackView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -97,7 +94,7 @@ class DetailsViewController: UIViewController, DetailsViewContract {
         priceLabel.textAlignment = .center
         priceLabel.backgroundColor = .red
         priceLabel.snp.makeConstraints {
-            $0.top.equalTo(dateLabel.snp.bottom).offset(15)
+            $0.top.equalTo(dateLabel.snp.bottom).offset(20)
             $0.height.equalTo(23)
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-15)
@@ -106,8 +103,8 @@ class DetailsViewController: UIViewController, DetailsViewContract {
         mainStackView.addArrangedSubview(eventImage)
         eventImage.contentMode = .scaleAspectFill
         eventImage.snp.makeConstraints {
-            $0.top.equalTo(priceLabel.snp.bottom).offset(60)
-            $0.height.equalTo(240)
+            $0.top.equalTo(priceLabel.snp.bottom).offset(20)
+            $0.height.equalTo(200)
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-15)
         }
@@ -124,14 +121,55 @@ class DetailsViewController: UIViewController, DetailsViewContract {
         
         mainStackView.addArrangedSubview(mapView)
         mapView.snp.makeConstraints {
+            $0.top.equalTo(descriptionTextView.snp.bottom).offset(20)
             $0.height.equalTo(180)
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-15)
         }
         
         mainStackView.addArrangedSubview(checkinButton)
+        checkinButton.addTarget(self, action: #selector(getUserInfo), for: .touchUpInside)
+        checkinButton.backgroundColor = .blue
+        checkinButton.layer.cornerRadius = 10
+        checkinButton.setTitle("Check-in", for: .normal)
+        checkinButton.setTitleColor(.white, for: .normal)
+        checkinButton.snp.makeConstraints {
+            $0.top.equalTo(mapView.snp.bottom).offset(20)
+            $0.height.equalTo(32)
+            $0.leading.equalToSuperview().offset(15)
+            $0.trailing.equalToSuperview().offset(-15)
+        }
+    }
+    
+    @objc func getUserInfo() {
+        let alert = UIAlertController(title: "Check in", message: "Adicione suas informações", preferredStyle: .alert)
+        // Creating the text fields to check-in
+        alert.addTextField { textfield in
+            textfield.placeholder = "Digite seu nome..."
+        }
         
+        alert.addTextField { textfield in
+            textfield.placeholder = "Digite seu e-mail..."
+        }
         
+        alert.addAction(UIAlertAction(title: "Check-in", style: .default, handler: { [weak self] _ in
+            if let name = alert.textFields![0].text,
+               let email = alert.textFields![1].text {
+                self?.presenter?.performCheckIn(name: name, email: email)
+                
+            }
+            
+        }))
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func checkInDone() {
+        showAlert(title: "Perfeito!", message: "Check-in confirmado!", titleAction: "OK")
+    }
+    
+    func showError() {
+        showAlert(title: "Woops!", message: "Não foi possível realizar o check-in!", titleAction: "OK")
     }
     
     private func setContent() {
@@ -145,5 +183,5 @@ class DetailsViewController: UIViewController, DetailsViewContract {
         descriptionTextView.text = presenter?.event?.description
         
     }
-
+    
 }

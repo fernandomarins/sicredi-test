@@ -19,4 +19,15 @@ class DetailsPresenter: DetailsPresenterContract {
         self.event = event
     }
 
+    func performCheckIn(name: String, email: String) {
+        interactor?.performCheckIn(name: name, email: email, eventId: event?.id ?? "")
+    }
+    
+    func performedCheckin() {
+        view?.checkInDone()
+    }
+    
+    func fetchedError() {
+        view?.showError()
+    }
 }
