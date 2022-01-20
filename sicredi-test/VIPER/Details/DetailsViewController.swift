@@ -86,7 +86,7 @@ class DetailsViewController: UIViewController, DetailsViewContract {
         dateLabel.adjustsFontSizeToFitWidth = true
         dateLabel.textAlignment = .center
         dateLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
             $0.height.equalTo(32)
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-15)
@@ -96,16 +96,16 @@ class DetailsViewController: UIViewController, DetailsViewContract {
         priceLabel.adjustsFontSizeToFitWidth = true
         priceLabel.textAlignment = .center
         priceLabel.snp.makeConstraints {
-            $0.top.equalTo(dateLabel.snp.bottom)
+            $0.top.equalTo(dateLabel.snp.bottom).offset(20)
             $0.height.equalTo(23)
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-15)
         }
         
         mainStackView.addArrangedSubview(eventImage)
-        eventImage.contentMode = .scaleAspectFill
+        eventImage.contentMode = .scaleAspectFit
         eventImage.snp.makeConstraints {
-            $0.top.equalTo(priceLabel.snp.bottom).offset(45)
+            $0.top.equalTo(priceLabel.snp.bottom).offset(20)
             $0.height.equalTo(240)
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-15)
@@ -115,7 +115,7 @@ class DetailsViewController: UIViewController, DetailsViewContract {
         descriptionTextView.adjustsFontForContentSizeCategory = true
         descriptionTextView.sizeToFit()
         descriptionTextView.snp.makeConstraints {
-            $0.top.equalTo(eventImage.snp.bottom)
+            $0.top.equalTo(eventImage.snp.bottom).offset(20)
             $0.height.equalTo(140)
             // I am setting to 12 because the textview has a little padding, apparently
             $0.leading.equalToSuperview().offset(12)
