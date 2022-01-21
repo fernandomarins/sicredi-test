@@ -72,14 +72,15 @@ class DetailsViewController: UIViewController, DetailsViewContract {
     private func setContentLayout() {
         mainStackView.addArrangedSubview(titleLabel)
         titleLabel.numberOfLines = 0
-        titleLabel.font = titleLabel.font.withSize(24)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 26)
+        titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.textAlignment = .center
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.height.equalTo(60)
-            $0.leading.equalTo(mainStackView.snp.leading)
-            $0.trailing.equalTo(mainStackView.snp.trailing)
+            $0.height.equalTo(70)
+            $0.leading.equalTo(mainStackView.snp.leading).offset(5)
+            $0.trailing.equalTo(mainStackView.snp.trailing).offset(-5)
         }
         
         mainStackView.addArrangedSubview(dateLabel)
