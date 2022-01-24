@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55103284279ED7F200C05999 /* sicredi_testTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55103283279ED7F200C05999 /* sicredi_testTests.swift */; };
+		5510328D279ED8DA00C05999 /* EventsViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5510328C279ED8DA00C05999 /* EventsViewTests.swift */; };
 		559506A6279882EE00C6FB6E /* EventsContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559506A5279882EE00C6FB6E /* EventsContract.swift */; };
 		559506AA279883D000C6FB6E /* EventsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559506A9279883D000C6FB6E /* EventsRouter.swift */; };
 		559506AC279883D900C6FB6E /* EventsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559506AB279883D900C6FB6E /* EventsInteractor.swift */; };
@@ -33,7 +35,20 @@
 		57667280B60F152AB45F8B7C /* Pods_sicredi_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7096622190CCE94734564190 /* Pods_sicredi_test.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		55103285279ED7F200C05999 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55E6AD6A276A8F9F0040BD7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55E6AD71276A8FA00040BD7F;
+			remoteInfo = "sicredi-test";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		55103281279ED7F200C05999 /* sicredi-testTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "sicredi-testTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		55103283279ED7F200C05999 /* sicredi_testTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sicredi_testTests.swift; sourceTree = "<group>"; };
+		5510328C279ED8DA00C05999 /* EventsViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewTests.swift; sourceTree = "<group>"; };
 		559506A5279882EE00C6FB6E /* EventsContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsContract.swift; sourceTree = "<group>"; };
 		559506A9279883D000C6FB6E /* EventsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsRouter.swift; sourceTree = "<group>"; };
 		559506AB279883D900C6FB6E /* EventsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsInteractor.swift; sourceTree = "<group>"; };
@@ -65,6 +80,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5510327E279ED7F200C05999 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55E6AD6F276A8FA00040BD7F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -82,6 +104,15 @@
 				7096622190CCE94734564190 /* Pods_sicredi_test.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		55103282279ED7F200C05999 /* sicredi-testTests */ = {
+			isa = PBXGroup;
+			children = (
+				55103283279ED7F200C05999 /* sicredi_testTests.swift */,
+				5510328C279ED8DA00C05999 /* EventsViewTests.swift */,
+			);
+			path = "sicredi-testTests";
 			sourceTree = "<group>";
 		};
 		559506A4279882D800C6FB6E /* VIPER */ = {
@@ -141,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				55E6AD74276A8FA00040BD7F /* sicredi-test */,
+				55103282279ED7F200C05999 /* sicredi-testTests */,
 				55E6AD73276A8FA00040BD7F /* Products */,
 				DA894999E47D67E787BAF1BD /* Pods */,
 				042FEC6E9E68CDEB024EEDDF /* Frameworks */,
@@ -151,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				55E6AD72276A8FA00040BD7F /* sicredi-test.app */,
+				55103281279ED7F200C05999 /* sicredi-testTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -193,6 +226,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		55103280279ED7F200C05999 /* sicredi-testTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55103289279ED7F200C05999 /* Build configuration list for PBXNativeTarget "sicredi-testTests" */;
+			buildPhases = (
+				5510327D279ED7F200C05999 /* Sources */,
+				5510327E279ED7F200C05999 /* Frameworks */,
+				5510327F279ED7F200C05999 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				55103286279ED7F200C05999 /* PBXTargetDependency */,
+			);
+			name = "sicredi-testTests";
+			productName = "sicredi-testTests";
+			productReference = 55103281279ED7F200C05999 /* sicredi-testTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		55E6AD71276A8FA00040BD7F /* sicredi-test */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55E6AD86276A8FA10040BD7F /* Build configuration list for PBXNativeTarget "sicredi-test" */;
@@ -222,6 +273,10 @@
 				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
+					55103280279ED7F200C05999 = {
+						CreatedOnToolsVersion = 13.2;
+						TestTargetID = 55E6AD71276A8FA00040BD7F;
+					};
 					55E6AD71276A8FA00040BD7F = {
 						CreatedOnToolsVersion = 13.2;
 					};
@@ -241,11 +296,19 @@
 			projectRoot = "";
 			targets = (
 				55E6AD71276A8FA00040BD7F /* sicredi-test */,
+				55103280279ED7F200C05999 /* sicredi-testTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5510327F279ED7F200C05999 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55E6AD70276A8FA00040BD7F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -304,6 +367,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5510327D279ED7F200C05999 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55103284279ED7F200C05999 /* sicredi_testTests.swift in Sources */,
+				5510328D279ED8DA00C05999 /* EventsViewTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55E6AD6E276A8FA00040BD7F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -330,6 +402,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		55103286279ED7F200C05999 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55E6AD71276A8FA00040BD7F /* sicredi-test */;
+			targetProxy = 55103285279ED7F200C05999 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		55E6AD7B276A8FA00040BD7F /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -350,6 +430,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		55103287279ED7F200C05999 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C8ULV38G2Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fernando.sicredi-testTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sicredi-test.app/sicredi-test";
+			};
+			name = Debug;
+		};
+		55103288279ED7F200C05999 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C8ULV38G2Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fernando.sicredi-testTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sicredi-test.app/sicredi-test";
+			};
+			name = Release;
+		};
 		55E6AD84276A8FA10040BD7F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -531,6 +647,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		55103289279ED7F200C05999 /* Build configuration list for PBXNativeTarget "sicredi-testTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55103287279ED7F200C05999 /* Debug */,
+				55103288279ED7F200C05999 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		55E6AD6D276A8F9F0040BD7F /* Build configuration list for PBXProject "sicredi-test" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
