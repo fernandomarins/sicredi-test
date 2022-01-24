@@ -32,23 +32,32 @@ class EventsViewTests: XCTestCase {
         
         sut.loadViewIfNeeded()
         
-        XCTAssertEqual(sut.tableView.numberOfRows(inSection: 0), 0)
+        XCTAssertEqual(sut.numberOfEvents(), 0)
     }
     
     func test_viewDidLoad_rendersEventsFromApi() throws {
         
         let sut = try makeSUT()
         
+        // events to test
         let events = [
-            Event(description: "Test 1", image: self.convertImageToBase64String(img: UIImage(named: "placeholder")!) , longitude: -51.2146267, latitude: -30.0392981, price: 29.99, title: "Feira de adoção de animais na Redenção", id: "1", date: 1534784400000),
-            Event(description: "Test 2", image: self.convertImageToBase64String(img: UIImage(named: "placeholder")!) , longitude: -51.2146267, latitude: -30.0392981, price: 64.99, title: "Feira de adoção de animais na Redenção", id: "2", date: 1534784400000)
+            Event(description: "Test 1", image: self.convertImageToBase64String(img: UIImage(named: "placeholder")!) , longitude: -51.2146267, latitude: -30.0392981, price: 29.99, title: "Test 1", id: "1", date: 1534784400000),
+            Event(description: "Test 2", image: self.convertImageToBase64String(img: UIImage(named: "placeholder")!) , longitude: -51.2146267, latitude: -30.0392981, price: 64.99, title: "Test 2", id: "2", date: 1534784400000)
         ]
         
         sut.presenter?.fetchedEvents(output: events)
         
         sut.loadViewIfNeeded()
 
-        XCTAssertEqual(sut.tableView.numberOfRows(inSection: 0), 2)
+        XCTAssertEqual(sut.numberOfEvents(), 2)
+        
+        XCTAssertEqual(sut.title(atRow: 0), "Test 1")
+        XCTAssertEqual(sut.title(atRow: 1), "Test 2")
+        
+//        let date = 1534784400000.convertIntDateToString()
+        
+//        XCTAssertEqual(sut.date(atRow: 0), date)
+//        XCTAssertEqual(sut.date(atRow: 1), date)
     }
     
     private func makeSUT() throws -> EventsView {
@@ -76,13 +85,36 @@ class EventsViewTests: XCTestCase {
 
 }
 
-private class EventServiceStub: EventServiceProtocol {
+//private class EventServiceStub: EventServiceProtocol {
+//
+//    func getEventsService(completion: @escaping (Result<Events?, Error>) -> ()) {
+//
+//    }
+//
+//    func makeCheckIn(eventId: String, name: String, email: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+//
+//    }
+//}
+
+extension EventsView {
     
-    func getEventsService(completion: @escaping (Result<Events?, Error>) -> ()) {
-        
+    private var eventsSection: Int { 0 }
+    
+    func numberOfEvents() -> Int {
+        tableView.numberOfRows(inSection: eventsSection)
     }
     
-    func makeCheckIn(eventId: String, name: String, email: String, completion: @escaping (Result<Bool, Error>) -> Void) {
-        
+    func title(atRow row: Int) -> String? {
+        return eventCell(atRow: row)?.titleLabel.text
+    }
+    
+    func date(atRow row: Int) -> String? {
+        return eventCell(atRow: row)?.dateLabel.text
+    }
+    
+    func eventCell(atRow row: Int) -> EventCell? {
+        let ds = tableView.dataSource
+        let indexPath = IndexPath(row: row, section: eventsSection)
+        return ds?.tableView(tableView, cellForRowAt: indexPath) as? EventCell
     }
 }
