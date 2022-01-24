@@ -60,19 +60,6 @@ class Client {
         }.resume()
     }
     
-    // Getting the events
-    class func getEvents(completion: @escaping([Event]?, Error?) -> Void) {
-        let url = Endpoints.getEvents.url
-        taskForGETRequest(from: url, reponseType: [Event].self) { response, error in
-            if let response = response {
-                completion(response, nil)
-            } else {
-                completion([], error)
-            }
-        }
-        
-    }
-    
     // Downloading the image
     class func downloadImage(from url: URL, completion: @escaping (Data?, Error?) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, _, error in

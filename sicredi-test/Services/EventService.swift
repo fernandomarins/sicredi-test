@@ -19,19 +19,16 @@ class EventService: EventServiceProtocol {
     static let shared = EventService()
     
     func getEventsService(completion: @escaping (Result<Events?, Error>) -> ()) {
-        Client.getEvents { events, error in
         
+        let url = Client.Endpoints.getEvents.url
+        Client.taskForGETRequest(from: url, reponseType: [Event].self) { response, error in
+            if let response = response {
+                completion(.success(response))
+            }
             
             if let error = error {
                 completion(.failure(error))
-                return
             }
-            
-            guard events == nil else {
-                completion(.success(events))
-                return
-            }
-
         }
     }
     
