@@ -12,11 +12,12 @@ class DetailsInteractor: DetailsInteractorContract {
     weak var presenter: DetailsPresenterContract?
     
     func performCheckIn(name: String, email: String, eventId: String) {
-        EventService.shared.makeCheckIn(eventId: eventId, name: name, email: email) { [weak self] success, error in
-            if success == nil {
-                self?.presenter?.performedCheckin()
-            } else {
-                self?.fetchedError()
+        EventService.shared.makeCheckIn(eventId: eventId, name: name, email: email) { result in
+            switch result {
+            case .success(_):
+                self.presenter?.performedCheckin()
+            case .failure(_):
+                self.fetchedError()
             }
         }
     }

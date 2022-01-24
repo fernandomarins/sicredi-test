@@ -11,7 +11,7 @@ import UIKit
 protocol EventServiceProtocol {
     func getEventsService(completion: @escaping (Result<Events?, Error>) -> ())
     
-    func makeCheckIn(eventId: String, name: String, email: String, completion: @escaping (Bool?, Error?) -> Void)
+    func makeCheckIn(eventId: String, name: String, email: String, completion: @escaping (Result<Bool, Error>) -> Void)
 }
 
 class EventService: EventServiceProtocol {
@@ -33,20 +33,26 @@ class EventService: EventServiceProtocol {
     }
     
     
-    func makeCheckIn(eventId: String, name: String, email: String, completion: @escaping (Bool?, Error?) -> Void) {
-        Client.checkIn(eventId: eventId, name: name, email: email) { data, response, error in
+    func makeCheckIn(eventId: String, name: String, email: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+        
+        let url = Client.Endpoints.makeCheckIn.url
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let body = "{\"eventId\": \"\(eventId)\", \"name\": \"\(name)\", \"email\": \"\(email)\"}"
+        request.httpBody = body.data(using: .utf8)
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
-                completion(false, error)
+                completion(.failure(error))
                 return
             }
             
             guard response?.getStatusCode() == 200 else {
-                completion(false, error)
+                completion(.success(true))
                 return
             }
-            
-            completion(true, nil)
-
         }
+        
+        task.resume()
     }
 }
