@@ -10,7 +10,6 @@ import UIKit
 
 protocol EventServiceProtocol {
     func getEventsService(completion: @escaping (Result<Events?, Error>) -> ())
-    
     func makeCheckIn(eventId: String, name: String, email: String, completion: @escaping (Result<Bool, Error>) -> Void)
 }
 

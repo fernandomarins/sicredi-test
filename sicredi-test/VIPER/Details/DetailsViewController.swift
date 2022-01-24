@@ -179,7 +179,7 @@ class DetailsViewController: UIViewController, DetailsViewContract {
     
     private func setContent() {
         titleLabel.text = presenter?.event?.title
-        dateLabel.text = convertDate(event: presenter?.event?.date ?? 0)
+        dateLabel.text = presenter?.event?.date.convertIntDateToString() ?? ""
         if let price = presenter?.event?.price {
             priceLabel.text = "R$ \(price)"
         }
