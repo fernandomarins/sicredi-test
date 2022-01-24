@@ -36,24 +36,19 @@ class EventsViewTests: XCTestCase {
     }
     
     func test_viewDidLoad_rendersEventsFromApi() throws {
+        
         let sut = try makeSUT()
         
-//        sut.presenter?.interactor?.getEvents
-//        sut.presenter?.interactor?.api?.getEventsService(completion: { [weak self] success, results, error in
-//            if success {
-//                let event = Event(description: "O Patas Dadas estará na Redenção, nesse domingo, com cães para adoção e produtos à venda!\n\nNa ocasião, teremos bottons, bloquinhos e camisetas!\n\nTraga seu Pet, os amigos e o chima, e venha aproveitar esse dia de sol com a gente e com alguns de nossos peludinhos - que estarão prontinhos para ganhar o ♥ de um humano bem legal pra chamar de seu. \n\nAceitaremos todos os tipos de doação:\n- guias e coleiras em bom estado\n- ração (as que mais precisamos no momento são sênior e filhote)\n- roupinhas \n- cobertas \n- remédios dentro do prazo de validade", image: self?.convertImageToBase64String(img: UIImage(named: "placeholder")!) ?? "", longitude: -51.2146267, latitude: -30.0392981, price: 29.99, title: "Feira de adoção de animais na Redenção", id: "1", date: 1534784400000)
-//            }
-//        })
+        let events = [
+            Event(description: "Test 1", image: self.convertImageToBase64String(img: UIImage(named: "placeholder")!) , longitude: -51.2146267, latitude: -30.0392981, price: 29.99, title: "Feira de adoção de animais na Redenção", id: "1", date: 1534784400000),
+            Event(description: "Test 2", image: self.convertImageToBase64String(img: UIImage(named: "placeholder")!) , longitude: -51.2146267, latitude: -30.0392981, price: 64.99, title: "Feira de adoção de animais na Redenção", id: "2", date: 1534784400000)
+        ]
+        
+        sut.presenter?.fetchedEvents(output: events)
         
         sut.loadViewIfNeeded()
-        
-//        sut.presenter?.fetchEvents()
-        
-        let exp = expectation(description: "Wait for API")
-        exp.isInverted = true
-        wait(for: [exp], timeout: 1)
-        
-        XCTAssertEqual(sut.tableView.numberOfRows(inSection: 0), sut.presenter?.contentArray.count)
+
+        XCTAssertEqual(sut.tableView.numberOfRows(inSection: 0), 2)
     }
     
     private func makeSUT() throws -> EventsView {
@@ -62,13 +57,11 @@ class EventsViewTests: XCTestCase {
         
         let sut = try XCTUnwrap(navigation.topViewController as? EventsView)
         
-//        sut.presenter?.interactor?.api = EventServiceStub()
-        
-//        sut.presenter?.interactor?.api?.getEventsService(completion: { _, _, _ in } )
-        
+//        sut.presenter?.interactor?.getEvents = { _ in }
         return sut
     }
     
+    // convert an image to string in base64
     private func convertImageToBase64String (img: UIImage) -> String {
         return img.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""
     }
