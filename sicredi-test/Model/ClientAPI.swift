@@ -60,20 +60,6 @@ class Client {
         }.resume()
     }
     
-    // Downloading the image
-    class func downloadImage(from url: URL, completion: @escaping (Data?, Error?) -> Void) {
-        let task = URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data else {
-                completion(nil, error)
-                return
-            }
-            
-            completion(data, nil)
-        }
-        
-        task.resume()
-    }
-    
     // Performing check-in
     class func checkIn(eventId: String, name: String, email: String, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
         let url = Endpoints.makeCheckIn.url
