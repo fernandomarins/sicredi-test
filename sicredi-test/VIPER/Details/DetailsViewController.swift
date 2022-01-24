@@ -12,7 +12,6 @@ import Kingfisher
 
 class DetailsViewController: UIViewController, DetailsViewContract {
     
-    
     var presenter: DetailsPresenterContract?
     
     // MARK: ViewCode

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5510328D279ED8DA00C05999 /* EventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5510328C279ED8DA00C05999 /* EventsTests.swift */; };
+		5510328F279EEFCC00C05999 /* DetailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5510328E279EEFCC00C05999 /* DetailsTests.swift */; };
 		559506A6279882EE00C6FB6E /* EventsContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559506A5279882EE00C6FB6E /* EventsContract.swift */; };
 		559506AA279883D000C6FB6E /* EventsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559506A9279883D000C6FB6E /* EventsRouter.swift */; };
 		559506AC279883D900C6FB6E /* EventsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559506AB279883D900C6FB6E /* EventsInteractor.swift */; };
@@ -47,6 +48,7 @@
 /* Begin PBXFileReference section */
 		55103281279ED7F200C05999 /* sicredi-testTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "sicredi-testTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5510328C279ED8DA00C05999 /* EventsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsTests.swift; sourceTree = "<group>"; };
+		5510328E279EEFCC00C05999 /* DetailsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTests.swift; sourceTree = "<group>"; };
 		559506A5279882EE00C6FB6E /* EventsContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsContract.swift; sourceTree = "<group>"; };
 		559506A9279883D000C6FB6E /* EventsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsRouter.swift; sourceTree = "<group>"; };
 		559506AB279883D900C6FB6E /* EventsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsInteractor.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				5510328C279ED8DA00C05999 /* EventsTests.swift */,
+				5510328E279EEFCC00C05999 /* DetailsTests.swift */,
 			);
 			path = "sicredi-testTests";
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5510328F279EEFCC00C05999 /* DetailsTests.swift in Sources */,
 				5510328D279ED8DA00C05999 /* EventsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
