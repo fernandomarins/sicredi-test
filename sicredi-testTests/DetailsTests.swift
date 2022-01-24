@@ -12,6 +12,7 @@ import MapKit
 
 class DetailsTests: XCTestCase {
 
+
     func test_canInit() throws {
         _ = try makeSUT()
     }
