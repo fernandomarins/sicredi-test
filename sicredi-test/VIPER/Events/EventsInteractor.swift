@@ -7,12 +7,16 @@
 
 import UIKit
 
+typealias getAllEvents = (@escaping (Result<Events?, Error>) -> ()) -> Void
+
 class EventsInteractor: EventsInteractorContract {
+    
+    var getEvents: getAllEvents = EventService.shared.getEventsService
     
     weak var presenter: EventsPresenterContract?
     
     func fetchEvents() {
-        EventService.shared.getEventsService { result in
+        getEvents { result in
             switch result {
             case .success(let events):
                 self.presenter?.fetchedEvents(output: events ?? [])
