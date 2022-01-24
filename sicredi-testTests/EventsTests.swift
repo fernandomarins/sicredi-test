@@ -1,5 +1,5 @@
 //
-//  EventsViewTests.swift
+//  EventsTests.swift
 //  sicredi-testTests
 //
 //  Created by Fernando Marins on 24/01/22.
@@ -8,7 +8,7 @@
 import XCTest
 @testable import sicredi_test
 
-class EventsViewTests: XCTestCase {
+class EventsTests: XCTestCase {
     
     func test_canInit() throws {
         _ = try makeSUT()
@@ -66,7 +66,6 @@ class EventsViewTests: XCTestCase {
         
         let sut = try XCTUnwrap(navigation.topViewController as? EventsView)
         
-//        sut.presenter?.interactor?.getEvents = { _ in }
         return sut
     }
     
@@ -75,26 +74,7 @@ class EventsViewTests: XCTestCase {
         return img.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""
     }
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
 }
-
-//private class EventServiceStub: EventServiceProtocol {
-//
-//    func getEventsService(completion: @escaping (Result<Events?, Error>) -> ()) {
-//
-//    }
-//
-//    func makeCheckIn(eventId: String, name: String, email: String, completion: @escaping (Result<Bool, Error>) -> Void) {
-//
-//    }
-//}
 
 extension EventsView {
     
