@@ -8,6 +8,7 @@
 import XCTest
 
 @testable import sicredi_test
+import MapKit
 
 class DetailsTests: XCTestCase {
 
@@ -19,6 +20,14 @@ class DetailsTests: XCTestCase {
         
         let sut = try makeSUT()
         XCTAssertNotNil(sut.presenter?.event)
+    }
+    
+    func test_viewConformsToMKMapViewDelegate() throws {
+        let sut = try makeSUT()
+        
+        sut.loadViewIfNeeded()
+        
+        XCTAssert(sut.conforms(to: MKMapViewDelegate.self), "ViewController under test does not conform to MKMapViewDelegate protocol")
     }
     
     func test_isInfoBeingDisplayed() throws {
