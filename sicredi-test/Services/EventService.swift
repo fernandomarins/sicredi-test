@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol EventServiceProtocol {
-    func getEventsService(completion: @escaping (_ success: Bool, _ results: Events?, _ error: Error?) -> ())
+    func getEventsService(completion: @escaping (Result<Events?, Error>) -> ())
     func loadImageService(url: URL, completion: @escaping (_ success: Bool, _ data: Data?, _ error: Error?) -> Void)
     func makeCheckIn(eventId: String, name: String, email: String, completion: @escaping (Bool?, Error?) -> Void)
 }
@@ -18,14 +18,19 @@ class EventService: EventServiceProtocol {
     
     static let shared = EventService()
     
-    func getEventsService(completion: @escaping (Bool, Events?, Error?) -> ()) {
+    func getEventsService(completion: @escaping (Result<Events?, Error>) -> ()) {
         Client.getEvents { events, error in
-            guard let events = events else {
-                debugPrint(error)
-                completion(false, nil, error)
+        
+            
+            if let error = error {
+                completion(.failure(error))
                 return
             }
-            completion(true, events, nil)
+            
+            guard events == nil else {
+                completion(.success(events))
+                return
+            }
 
         }
     }
